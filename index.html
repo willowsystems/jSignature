@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset='utf-8' />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
+<meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile. "device-HEIGHT" is intentional  -->
+<meta name="description" content="jSignature : jQuery plugin - Draw signature in browser." />
+<link rel="stylesheet" type="text/css" media="screen" href="css/stylesheet.css">
+<title>jSignature</title>
+<script src="js/libs/modernizr.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="js/libs/flashcanvas.js"></script>
+<![endif]-->
+</head>
+<body>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="jSignature : jQuery plugin - draw signature in browser." />
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+      <a id="forkme_banner" href="https://github.com/willowsystems/jSignature">View Source</a>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+      <h1 id="project_title">jSignature</h1>
+      <h2 id="project_tagline">jQuery plugin - Draw signature in browser.</h2>
 
-    <title>jSignature</title>
-  </head>
+        <section id="downloads">
+          <a class="zip_download_link" href="https://github.com/willowsystems/jSignature/zipball/master">Download this project as a .zip file</a>
+          <!-- <a class="tar_download_link" href="https://github.com/willowsystems/jSignature/tarball/master">Download this project as a tar.gz file</a> -->
+        </section>
+    </header>
+</div>
 
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/willowsystems/jSignature">View on GitHub</a>
-
-          <h1 id="project_title">jSignature</h1>
-          <h2 id="project_tagline">jQuery plugin - draw signature in browser.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/willowsystems/jSignature/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/willowsystems/jSignature/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>jSignature</h1>
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+  <section id="main_content" class="inner">
+    <h1>jSignature</h1>
 
 <p>jSignature is a jQuery plugin which simplifies creation of a signature capture field in the browser window, allowing a user to draw a signature using mouse, pen, or finger. </p>
 
@@ -44,7 +46,9 @@
 This arbitrary degrading and enhancing of screen representation of the captured signature is done on purpose. Real-life use of the captured signature could be in high-resolution (likely print) environment, rendered using high-quality, computationally-intensive smoothing logic that can analyze the entire captured sig, drop some and fit perfect curves between the remaining dots. <strong>The pretty image of the signature customer sees real-time on the screen is a 'balance' of what the device used for capture can render without sacrificing the responsiveness of capture.</strong> Rendering on Canvas within browser can, surprisingly, be extremely slow even on decent equipment and that slowness depends on too many diverse variables for us to control. The plugin tries to make some guesses about efficiency of the device and degrades or enhances the renderer appropriately.
 When "powerfull" hardware is inferred the signature drawn on the screen is made more pleasing to the eye through stroke smoothing and pressure simulation. When slow rendering device (Android Browser, FlashCanvas-based backend) is detected, smoothing is kicked up a notch to compensate for large gaps in captured stroke coordinates. In all cases, customer will be pleased by yet another opportunity to sign.</li>
 <li>  jSignature makes it easy to pluck itself into an existing carefully-styled site. jSignature automatically detects the colors (even if they are inherited) used on the wrapping (div) element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature automatically detects the zoom and size of the parent element and uses 100% of its (zoomed) width and height (which becomes a life-saver for Flash-based Canvas emulator use). This adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens). You don't have to lift a finger for jSignature to follow the style you prescribe to the web page as the whole.</li>
-</ul><p>See <a href="http://walnutcomputing.com/demo/signature/" title="Signature Capture Demos">demos here</a>.</p>
+</ul>
+
+<p>See <a href="http://willowsystems.github.com/jSignature/#demo" title="Signature Capture Demos">demos here</a>.</p>
 
 <h2>Adding jSignature to your page</h2>
 
@@ -173,28 +177,31 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 <p><a href="http:www.opensource.org/licenses/mit-license.php">MIT License</a></p>
 
 <p>See source header for full and most current Copyright attributions.</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">jSignature maintained by <a href="https://github.com/willowsystems">willowsystems</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+</section>
+</div>
 
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-31405468-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+  <p class="copyright">jSignature maintained by <a href="https://github.com/willowsystems">Willow Systems Corp</a></p>
+  <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div>
 
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
 
+<script src="js/loader.js"></script>
+
+<script type="text/javascript">
+  var _gaq=[['_setAccount','UA-31405468-1'],['_trackPageview']];
+  (function(d,t){
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)
+  }(document,'script'));
+</script>
   </body>
 </html>
