@@ -270,24 +270,9 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 640px;
+  max-width: 720px;
   padding: 20px 10px;
   margin: 0 auto;
-}
-
-#forkme_banner {
-  display: block;
-  position: absolute;
-  top:0;
-  right: 10px;
-  z-index: 10;
-  padding: 10px 50px 10px 10px;
-  color: #fff;
-  background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
-  font-weight: 700;
-  box-shadow: 0 0 10px rgba(0,0,0,.5);
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
 }
 
 #header_wrap {
@@ -297,10 +282,6 @@ Full-Width Styles
   background: -ms-linear-gradient(top, #373737, #212121);
   background: -o-linear-gradient(top, #373737, #212121);
   background: linear-gradient(top, #373737, #212121);
-}
-
-#header_wrap .inner {
-  padding: 50px 10px 30px 10px;
 }
 
 #project_title {
@@ -319,43 +300,66 @@ Full-Width Styles
   text-shadow: #111 0px 0px 10px;
 }
 
-#downloads {
+.shrinkwidth_parent 
+{
+	text-align:center;
+}
+.shrinkwidth_parent span
+{
+	display: inline-block;
+}
+.shrinkwidth_subject
+{
+	text-align:left;
+	display:block;
+}
+
+nav {
   position: absolute;
-  width: 210px;
   z-index: 10;
-  bottom: -40px;
-  right: 0;
-  height: 70px;
-  background: url('../images/icon_download.png') no-repeat 0% 90%;
+  bottom: -20px;
+  height: 40px;
+  width: 100%;
 }
 
-.zip_download_link {
-  display: block;
-  float: right;
-  width: 90px;
-  height:70px;
-  text-indent: -5000px;
+nav li {
+  display: inline;
+  padding: 0;
+}
+
+nav a{
+  display:inline-block; 
+  vertical-align:bottom;
+  height: 40px;
   overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom left;
+  padding: 0px 15px 0px 15px;
+  margin-bottom: 5px;
+  background: #327143;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
 }
 
-.tar_download_link {
-  display: block;
-  float: right;
-  width: 90px;
-  height:70px;
-  text-indent: -5000px;
-  overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom right;
-  margin-left: 10px;
+nav a:hover{
+  background: #429659;
 }
 
-.zip_download_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top left;
+nav a.sourcecodelink {
+  padding-right: 45px;
+  background: url('../images/blacktocat.png') #0074ce no-repeat 95% 50%;
 }
 
-.tar_download_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top right;
+nav a.sourcecodelink:hover{
+  background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
+}
+
+nav a div{
+  display:table-cell;
+  vertical-align:middle;
+  height: 40px;
+  color: white;
+  font-size: 125%;
+  font-weight: 200;
 }
 
 #main_content_wrap {
@@ -373,7 +377,6 @@ Full-Width Styles
 }
 
 
-
 /*******************************************************************************
 Small Device Styles
 *******************************************************************************/
@@ -383,12 +386,7 @@ Small Device Styles
     font-size:14px;
   }
 
-  #downloads {
-    display: none;
-  }
-
   .inner {
-    min-width: 320px;
     max-width: 480px;
   }
 
@@ -421,8 +419,6 @@ Small Device Styles
   }
 
   code, pre {
-    min-width: 320px;
-    max-width: 480px;
     font-size: 11px;
   }
 
