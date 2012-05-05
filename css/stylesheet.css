@@ -167,9 +167,6 @@ pre, code {
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-
-
-
 }
 
 pre {
@@ -269,9 +266,10 @@ Full-Width Styles
 }
 
 .inner {
+  display: block;
   position: relative;
   max-width: 720px;
-  padding: 20px 10px;
+  padding: 0px 10px;
   margin: 0 auto;
 }
 
@@ -282,6 +280,7 @@ Full-Width Styles
   background: -ms-linear-gradient(top, #373737, #212121);
   background: -o-linear-gradient(top, #373737, #212121);
   background: linear-gradient(top, #373737, #212121);
+  padding: 0.5em 0;
 }
 
 #project_title {
@@ -293,7 +292,7 @@ Full-Width Styles
 }
 
 #project_tagline {
-  color: #fff;
+  color: #ddd;
   font-size: 24px;
   font-weight: 300;
   background: none;
@@ -314,17 +313,20 @@ Full-Width Styles
 	display:block;
 }
 
-nav {
-  position: absolute;
-  z-index: 10;
-  bottom: -20px;
-  height: 40px;
-  width: 100%;
+header hgroup{
+  display:block;
+  margin-bottom: 10px;
+} 
+header hgroup span{
+  display:inline;
+  vertical-align:baseline;
+  height: 100%;
 }
 
-nav li {
-  display: inline;
-  padding: 0;
+nav {
+  display: block;
+  margin-top: -10px;
+  width: 100%;
 }
 
 nav a{
@@ -369,12 +371,16 @@ nav a div{
 }
 
 #main_content {
-  padding-top: 40px;
 }
 
 #footer_wrap {
   background: #212121;
 }
+
+/* Contain floats: h5bp.com/q */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
 
 
 /*******************************************************************************
