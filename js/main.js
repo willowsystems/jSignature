@@ -72,26 +72,28 @@
 		,function(){return $}
 	)
 
+	var pathtojsignature
+	if (location.host === 'localhost') {
+		pathtojsignature ='js!js/libs/jSignature.min.js'
+	} else {
+		pathtojsignature = 'js!' + location.protocol + '//raw.github.com/willowsystems/jSignature/stable/jSignature.min.js'
+    }
+	
  	define(
  		'requirements'
  		, [
 			//'js/libs/jquery.inputs-20120113.min'
 			//, 'js!js/libs/jstorage-0.1.6.1.min.js'
 			'js!js/libs/sammy.min.js'
+			, pathtojsignature
 		]
  		, function() {return $}
- 	)
-
- 	define(
- 		'templating'
- 		, ['js!js/libs/mustache.min.js']
- 		, function() {return Mustache}
  	)
  	
  	define(
  	    "myapp"
- 	    , ['jquery', 'js/router', 'templating', 'requirements']
- 	    , function($, router, templating) {
+ 	    , ['jquery', 'js/router', 'requirements']
+ 	    , function($, router) {
  	        // note, myapp_ may, but does not have to contain RequireJS-compatible define that returns something.
  	        // however, if it contains something like "$(document).ready(function() { ... " already it MAY fire before 
  	        // its depends - sammy, jquery plugins - are fully loaded.
@@ -99,7 +101,7 @@
  	        // that takes jQuery (with all loaded , applied plugins) 
  	        // The expectation is that before the below return is executed, all depends are loaded (in order of depends tree)
  	        // You could init your app here like so:
- 	        return router($, templating) 
+ 	        return router($) 
  	        // catch the returned instance in require( and run the pre-inited application instance there
  	    }
  	)

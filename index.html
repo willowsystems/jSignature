@@ -34,37 +34,39 @@
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
 
-<section class="inner">
+<section id="menu" class="inner">
 <nav class="shrinkwidth_parent">
 <span><!-- used for shrinking the width of content div -->
 <div class="shrinkwidth_subject">
 	<a class="menuitem" href="#/"><div>About</div></a>
-	<a class="menuitem" href="#/demo"><div>Demo</div></a>
-	<a class="menuitem" href="#/use"><div>Use</div></a>
+	<a class="menuitem" href="#/demo/"><div>Demo</div></a>
 	<a class="menuitem sourcecodelink" href="https://github.com/willowsystems/jSignature"><div>Source Code</div></a>
 </div>
 </span>
 </nav>
 </section>
 
-<section id="main_content" class="inner">
+<section id="demo" class="inner">
+</section>
+
+<section id="about" class="inner">
 <article id="article_about">
 <h2>About jSignature</h2>
 
 <p>jSignature is a jQuery plugin which simplifies creation of a signature capture field in the browser window, allowing a user to draw a signature using mouse, pen, or finger. </p>
 
-<p>Although simple bitmap (PNG) export of signature image is supported, jSignature is targeting usecases providing reliable extraction of highly scalable stroke movement coordinates (aka vector image) of the signature. A resonable effort is made to make the strokes look pretty on the screen while these are drawn by the signor. However because "image" (even the one that looks pretty on the screen) is a substandard medium for use in print, the focus here is on extraction of core vector data that can be (enhanced again and) rendered on a whim, possibly server-side.</p>
+<p>jSignature captures signature as vector outlines of the strokes. Although jSignature can export great bitmap (PNG) too, extraction of highly scalable stroke movement coordinates (aka vector image) of the signature allows much greater flexibility of signature rendering.</p> 
 
-<ul>
-<li>  All <em>major</em> desktop, tablet and phone browsers are supported. (List of supported / tested browsers, devices is coming) Default stroke entry capture technology is HTML5 Canvas element. jSignature falls back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (IE 8 and less). </li>
-<li>  All signature data is captured and stored internally as vectors. Same signature can be rerendered using variety of postproduction filters to improve presentation on printed media, small screens etc.</li>
-<li>  What was rendered in the browser during capture is not always what was captured. Rendering of strokes differ per browser's featureset, capture device quality, screen size. Capture of data is always same - we capture as many movement coordinates as possible. Real-time jSignature renders only the device-appropriate "prettiest" approximation of what we capture. 
-This arbitrary degrading and enhancing of screen representation of the captured signature is done on purpose. Real-life use of the captured signature could be in high-resolution (likely print) environment, rendered using high-quality, computationally-intensive smoothing logic that can analyze the entire captured sig, drop some and fit perfect curves between the remaining dots. <strong>The pretty image of the signature customer sees real-time on the screen is a 'balance' of what the device used for capture can render without sacrificing the responsiveness of capture.</strong> Rendering on Canvas within browser can, surprisingly, be extremely slow even on decent equipment and that slowness depends on too many diverse variables for us to control. The plugin tries to make some guesses about efficiency of the device and degrades or enhances the renderer appropriately.
-When "powerfull" hardware is inferred the signature drawn on the screen is made more pleasing to the eye through stroke smoothing and pressure simulation. When slow rendering device (Android Browser, FlashCanvas-based backend) is detected, smoothing is kicked up a notch to compensate for large gaps in captured stroke coordinates. In all cases, customer will be pleased by yet another opportunity to sign.</li>
-<li>  jSignature makes it easy to pluck itself into an existing carefully-styled site. jSignature automatically detects the colors (even if they are inherited) used on the wrapping (div) element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature automatically detects the zoom and size of the parent element and uses 100% of its (zoomed) width and height (which becomes a life-saver for Flash-based Canvas emulator use). This adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens). You don't have to lift a finger for jSignature to follow the style you prescribe to the web page as the whole.</li>
-</ul>
+<p>A extra effort (through smoothing and pressure simulation) is made to make the strokes look pretty on the screen while these are drawn by the signor.</p>
 
-<p>See <a href="#demo" title="Signature Capture Demos">demos here</a>.</p>
+<p>All <em>major</em> desktop, tablet and phone browsers are supported. HTML5 Canvas element is used by default. We fall back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (Iinternet Explorer v.8 and lower). </p>
+<p>  All signature data is captured and stored internally as vectors. Same signature can be rerendered using variety of postproduction filters (scale, colorize, thicken etc) to improve presentation on printed media, small screens etc.</p>
+<p>  Real-time jSignature renders only the device-appropriate "prettiest" approximation of what we capture. Capture of data is always same - we capture as many movement coordinates as possible. Rendering of strokes differs per browser's capabilities, efficiency of the device, screen size.<p/>
+<strong>This degrading and enhancing of screen representation of the captured signature is done on purpose to insure that rendering does not impead on the responsiveness of capture.</strong><br/>
+For example, on slow rendering devices (Android Browser, FlashCanvas-based Canvas emulation) smoothing is kicked up a notch to compensate for large gaps in captured stroke coordinates - a result of inefficiency of capture device. In all cases, customer shold be pleased by responsiveness and beauty of the drawing.</li>
+<p>jSignature makes it easy to pluck itself into an existing styled site. jSignature automatically detects the colors used on the wrapping element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens) and automatically rescales the drawing area and signature when parent element changes size.</p>
+
+<p>See <a href="#/demo/" title="Signature Capture Demos">demos here</a>.</p>
 </article>
 
 <article id="article_adding">

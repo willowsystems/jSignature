@@ -123,7 +123,7 @@ a {
   -ms-transition: text-shadow 0.5s ease;
 }
 
-#main_content a:hover {
+#about a:hover {
   color: #0069ba;
   text-shadow: #0090ff 0px 0px 2px;
 }
@@ -370,9 +370,6 @@ nav a div{
   border-bottom: 1px solid #111;
 }
 
-#main_content {
-}
-
 #footer_wrap {
   background: #212121;
 }
@@ -382,6 +379,22 @@ nav a div{
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
 
+
+canvas { border: 1px dotted #000;}
+#signatureparent {color:darkblue;background-color:lightgrey;}
+
+#demo div {
+	margin-top:1em;
+	margin-bottom:1em;
+}
+#demo input {
+	padding: .5em;
+	margin: .5em;
+}
+#demo select {
+	padding: .5em;
+	margin: .5em;
+}
 
 /*******************************************************************************
 Small Device Styles
