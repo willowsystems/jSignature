@@ -8,7 +8,7 @@
 <meta name="description" content="jSignature : jQuery plugin - Draw signature in browser." />
 <link rel="stylesheet" type="text/css" media="screen" href="css/stylesheet.css">
 <title>jSignature</title>
-<script src="js/libs/modernizr.js"></script>
+<script src="js/libs/modernizr.min.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/libs/flashcanvas.js"></script>
 <![endif]-->
@@ -22,18 +22,21 @@
 
       <h1 id="project_title">jSignature</h1>
       <h2 id="project_tagline">jQuery plugin - Draw signature in browser.</h2>
-
+<!-- 
         <section id="downloads">
           <a class="zip_download_link" href="https://github.com/willowsystems/jSignature/zipball/master">Download this project as a .zip file</a>
-          <!-- <a class="tar_download_link" href="https://github.com/willowsystems/jSignature/tarball/master">Download this project as a tar.gz file</a> -->
+          <a class="tar_download_link" href="https://github.com/willowsystems/jSignature/tarball/master">Download this project as a tar.gz file</a>
         </section>
+ -->
     </header>
 </div>
 
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
   <section id="main_content" class="inner">
-    <h1>jSignature</h1>
+
+<article id="article_about">
+<h2>About jSignature</h2>
 
 <p>jSignature is a jQuery plugin which simplifies creation of a signature capture field in the browser window, allowing a user to draw a signature using mouse, pen, or finger. </p>
 
@@ -48,8 +51,10 @@ When "powerfull" hardware is inferred the signature drawn on the screen is made 
 <li>  jSignature makes it easy to pluck itself into an existing carefully-styled site. jSignature automatically detects the colors (even if they are inherited) used on the wrapping (div) element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature automatically detects the zoom and size of the parent element and uses 100% of its (zoomed) width and height (which becomes a life-saver for Flash-based Canvas emulator use). This adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens). You don't have to lift a finger for jSignature to follow the style you prescribe to the web page as the whole.</li>
 </ul>
 
-<p>See <a href="http://willowsystems.github.com/jSignature/#demo" title="Signature Capture Demos">demos here</a>.</p>
+<p>See <a href="#demo" title="Signature Capture Demos">demos here</a>.</p>
+</article>
 
+<article id="article_adding">
 <h2>Adding jSignature to your page</h2>
 
 <p>jSignature depends on (more or less recent) <strong>jQuery</strong>,  and <strong>(only for IE 7 and 8) on FlashCanvas</strong>. Both are included, for convenience, in the <code>/libs</code> folder of this project, but you can certainly use your own versions. </p>
@@ -90,7 +95,11 @@ It attaches and listens to movement event handlers, stores stroke data inside da
 <li>  Then we load jSignature plugin.</li>
 <li>  Next we have the <code>div</code> inside which the canvas element will be created (You cannot reuse a canvas element at this time. Plugin creates its own Canvas elem inside the DIV.)</li>
 <li>  Lastly, the script invokes the signature widget within the specified DIV.</li>
-</ul><h2>API</h2>
+</ul>
+</article>
+
+<article id="article_api">
+<h2>API</h2>
 
 <p>The following method becomes exposed on top of jQuery objects: <code>.jSignature(String command, *args)</code></p>
 
@@ -126,7 +135,9 @@ $sigdiv.jSignature("setData", "data:" + datapair.join(","))
 </code></pre>
 
 <p>See tests and index.html for more examples.</p>
+</article>
 
+<article id="article_plugins">
 <h2>Data Import / Export (and Plugins)</h2>
 
 <p>The following plugins (data formats) are part of mainline jSignature minified distributable:</p>
@@ -160,7 +171,9 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </ul><p>If you want to force yourself to use only Black on top of White signature capture web page style forever, DO use bitmap export. If you want to have your database admin scream at you because backup of database with all that bitmap data takes more than a day, DO use bitmap export. If you want your sales / business dept to scream at you because your signature capture format cannot be easily integrated into their new carefully-styled, wizbang product / service, DO use bitmap export. If you want to explain why siganture format export you chose does not work on all target platforms, DO use bitmap export. If you want to take the easy route now, and make the the IT person that will come in after you are fired do the difficult task of applying ImageMagic wisardry upon a mess of colored pixels you decided to collect, DO use bitmap export format.</p>
 
 <p>If the use of the captured signature has anything to do with "business" or "printing" or "multiple presentation venues" use the Vector formats like "base30" or "svg" data and enhance + render that in postproduction. Decompression and sample, rudimentary rendering code (.Net, Python as of Feb 2012) can be found in "extras" folder. You would use these as core that provides loop-able coordinate data arrays for your own rendering logic.</p>
+</article>
 
+<article id="article_events">
 <h2>Events</h2>
 
 <p>The dom element upon which jSignature was initialized emits 'change' event immediately after a stroke is done being added to the storage. (In other words, when user is done drawing each stroke. If user draws 3 strokes, this event is emitted 3 times, after each stroke is done.)</p>
@@ -171,13 +184,15 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </code></pre>
 
 <p>Event is emitted asynchronously through a "thread" ( <code>setTimeout(..., 3)</code> ) so you don't need to wrap your event handler into "thread" of any kind, as jSignature widget will go on and will not be waiting for you to be done with your custom event handler logic.</p>
+</article>
 
+<article id="article_license">
 <h2>License, Copyright</h2>
 
 <p><a href="http:www.opensource.org/licenses/mit-license.php">MIT License</a></p>
 
 <p>See source header for full and most current Copyright attributions.</p>
-
+</article>
 </section>
 </div>
 
@@ -191,17 +206,30 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/libs/jquery.min.js"><\/script>')</script>
+<script>
+	//make it safe to use console.log always
+	(function(b) { function c() { } for (var d = "assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn".split(","), a; a = d.pop(); ) { b[a] = b[a] || c } })((function() {try { console.log(); return window.console; } catch (err) {return window.console = {};}})());
 
-<script src="js/loader.js"></script>
+	function InjectScript(path){
+	    var g=document.createElement('script')
+	    , s=document.getElementsByTagName('script')[0]
+	    
+	    g.src=path
+	    s.parentNode.insertBefore(g,s)
+	}
 
-<script type="text/javascript">
-  var _gaq=[['_setAccount','UA-31405468-1'],['_trackPageview']];
-  (function(d,t){
-    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)
-  }(document,'script'));
+	;(Object.keys && String.prototype.trim && Date.prototype.toISOString && Array.prototype.forEach && Array.prototype.indexOf && Array.prototype.map) || InjectScript('js/libs/augment.min.js')
+	;window.JSON || InjectScript('js/libs/json3.min.js')
+	;window.jQuery || InjectScript('js/libs/jquery.min.js')
+
+	if(location.host !== 'localhost'){
+		// Google Analytics
+		var _gaq=[['_setAccount','UA-31405468-1'],['_trackPageview']]; 
+		InjectScript(('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js')
+	}
+
 </script>
-  </body>
+<script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
+<script src="js/main.js"></script>
+</body>
 </html>
