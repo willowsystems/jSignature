@@ -122,9 +122,9 @@ It attaches and listens to movement event handlers, stores stroke data inside da
 
 <ul>
 <li>  <code>init</code> is the default, assumed action. <code>init</code> takes one argument - a settings Object. You can omit the command and just pass the settings object in upon init. Returns (in a traditional jQuery chainable way) jQuery object ref to the element onto which the plugin was applied.</li>
-<li>  <code>reset</code> just clears the signature pad, data store (and puts back signature line and other decor). Returns (in a traditional jQuery chainable way) jQuery object ref to the element onto which the plugin was applied.</li>
+<li>  <code>clear</code> (also aliased as <code>reset</code>) clears the signature pad, data store (and puts back signature line and other decor). Returns (in a traditional jQuery chainable way) jQuery object ref to the element onto which the plugin was applied.</li>
 <li>  <code>getData</code> takes an argument - the name of the data format. Returns a data object appropriate for the data format.</li>
-<li>  <code>setData</code> takes two arguments - data object, data format name. When data object is a string formatted in data-url pattern you don't need to specify the data dormat name. The data format name (mime) will be implied from the data-url prefix. See example below for that. Returns (in a traditional jQuery chainable way) jQuery object ref to the element onto which the plugin was applied.</li>
+<li>  <code>setData</code> (also aliased as <code>importData</code>) takes two arguments - data object, (optional) data format name. When data object is a string formatted in data-url pattern you don't need to specify the data dormat name. The data format name (mime) will be implied from the data-url prefix. Returns (in a traditional jQuery chainable way) jQuery object ref to the element onto which the plugin was applied.</li>
 <li>  <code>listPlugins</code> takes an argument - a string denoting the category (Only <code>export</code>, <code>import</code> supported at this time) of plugins to list. Returns an array of strings. </li>
 </ul><p>Usage examples:</p>
 
