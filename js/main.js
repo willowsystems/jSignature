@@ -72,20 +72,13 @@
 		,function(){return $}
 	)
 
-	var pathtojsignature
-	if (location.host === 'localhost') {
-		pathtojsignature ='js!js/libs/jSignature.min.js'
-	} else {
-		pathtojsignature = 'js!' + location.protocol + '//raw.github.com/willowsystems/jSignature/stable/jSignature.min.js'
-    }
-	
  	define(
  		'requirements'
  		, [
 			//'js/libs/jquery.inputs-20120113.min'
 			//, 'js!js/libs/jstorage-0.1.6.1.min.js'
 			'js!js/libs/sammy.min.js'
-			, pathtojsignature
+			, 'js!js/libs/jSignature.min.js'
 		]
  		, function() {return $}
  	)
