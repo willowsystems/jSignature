@@ -82,7 +82,7 @@ return function($) {
 		, function(){
 			$('#about').hide()
 			
-            $('#demo').html('<div id="signatureparent">jSignature inherits colors from here<div id="signature"></div></div><div id="tools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
+            $('#demo').html('<div id="signatureparent">jSignature inherits colors from here - parent element<div id="signature"></div></div><div id="tools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
             
             var $sigdiv = $('#signature').jSignature()
         	, $tools = $('#tools')
@@ -98,7 +98,7 @@ return function($) {
         			chops.push('<option value="' + name + '">' + name + '</option>')
         		}
         	}
-        	chops.push('</select><span><b> or: </b></span>')
+        	chops.push('</select><span><b> or </b></span>')
         	
         	$(chops.join('')).bind('change', function(e){
         		if (e.target.value !== ''){
