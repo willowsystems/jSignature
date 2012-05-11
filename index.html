@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html itemscope itemtype="http://schema.org/Product">
 <head>
 <meta charset='utf-8' />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
 <meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile. "device-HEIGHT" is intentional  -->
-<meta name="description" content="jSignature : jQuery plugin - Draw signature in browser." />
+<meta name="name" content="jSignature - Draw signature in the browser" />
+<meta itemprop="name" content="jSignature - Draw signature in the browser">
+<meta name="description" content="jSignature is a signature capture applet made for browsers. It is written in JavaScript and supports many desktop and mobile browsers. It's so easy to use and integrate, you would have no excuse not to use it." />
+<meta itemprop="description" content="jSignature is a signature capture applet made for browsers. It is written in JavaScript and supports many desktop and mobile browsers. It's so easy to use and integrate, you would have no excuse not to use it.">
 <link rel="stylesheet" type="text/css" media="screen" href="css/stylesheet.css">
 <title>jSignature</title>
 <script src="js/libs/modernizr.min.js"></script>
@@ -23,7 +26,7 @@
 <span><!-- used for shrinking the width of content div -->
 <div class="shrinkwidth_subject">
 <span id="project_title">jSignature</span><span>&nbsp;</span>
-<span id="project_tagline">Draw signature in the browser.</span>	
+<span id="project_tagline">Draw signature in the browser.</span>
 </div>
 </span>
 </hgroup>
@@ -212,14 +215,13 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </div>
 
 <!-- FOOTER  -->
-<!--
 <div id="footer_wrap" class="outer">
 <footer class="inner">
-  <p class="copyright">jSignature maintained by <a href="https://github.com/willowsystems">Willow Systems Corp</a></p>
-  <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+<p style="text-align: center">
+<span>Like what you see? <span style="display:inline-block; vertical-align:middle"><g:plusone size="medium" annotation="none"></g:plusone></span> this page</span><span class="horizontalspanseparator">|</span><span><a href="https://plus.google.com/117957737400016616017?prsrc=3" rel="publisher">Join jSignature on<img src="https://ssl.gstatic.com/images/icons/gplus-16.png" alt="" style="display:inline-block; vertical-align:middle;border:0;width:16px;height:16px;margin:0;padding:0;margin-left:0.5em;"/></a></span><span class="horizontalspanseparator">|</span><span class="copyright">Project is sponsored in part by <a href="http://willow-systems.com/">Willow Systems Corp</a></span>
+</p>
 </footer>
 </div>
--->
 
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -238,15 +240,22 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 	;(Object.keys && String.prototype.trim && Date.prototype.toISOString && Array.prototype.forEach && Array.prototype.indexOf && Array.prototype.map) || InjectScript('js/libs/augment.min.js')
 	;window.JSON || InjectScript('js/libs/json3.min.js')
 	;window.jQuery || InjectScript('js/libs/jquery.min.js')
-
+</script>
+<script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
+<script src="js/main.js"></script>
+<script>
 	if(location.host !== 'localhost'){
 		// Google Analytics
 		var _gaq=[['_setAccount','UA-31405468-1'],['_trackPageview']]; 
 		InjectScript(('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js')
 	}
 
+    // plus one button support
+    ;(function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
 </script>
-<script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
-<script src="js/main.js"></script>
 </body>
 </html>

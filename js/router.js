@@ -23,16 +23,18 @@ return function($) {
 		
 		// This code sets up Sammy.js application. It is inited at the very end.
 		app.sammyapp = $.sammy(function() {
-		    this.raise_errors = true
-		    this.debug = true
+		    this.raise_errors = false
+		    this.debug = false
 		    this.run_interval_every = 300
 		    this.template_engine = null
 		    this.element_selector = '#main_content_wrap'
+		    this.use('GoogleAnalytics')
 		})
 		
 		// ROUTES Have to be defined from complex to simple. Otherwise the shortest match will pick it up first.
 		
 		app.sammyapp.route('get',/\#\/PageNotFound\//, function() {
+			this.noTrack()
 			document.title = "404 - Page not found"
 		    $.publish(namespace + "_show_404_page")
 		    // this.notFound()
@@ -42,13 +44,16 @@ return function($) {
 			$.publish(namespace + "_show_demo_page")
 		})
 		app.sammyapp.route('get',/\#\/(.+)/, function() {
+			this.noTrack()
 			this.app.setLocation("#/PageNotFound/")
 		})
 		app.sammyapp.route('get',/\#\//, function() {
+			this.noTrack()
 			document.title = "About jSignature"
 		    $.publish(namespace + "_show_about_page")
 		})
 		app.sammyapp.route('get',/(.*)/, function() {
+			this.noTrack()
 			this.app.setLocation("#/PageNotFound/")
 		})
 		
@@ -71,12 +76,11 @@ return function($) {
 	$.subscribe(
 		namespace + "_show_about_page"
 		, function(){
-            $('#demo').hide()
+			$('#demo').hide()
 			$('#about').show()
 		}
 	)
 
-	
 	$.subscribe(
 		namespace + "_show_demo_page"
 		, function(){
