@@ -14,6 +14,38 @@ return function($) {
 	'use strict'
 	
 	var namespace = 'jSignatureHome'
+	, dynamicAppSelector = '#main_content_wrap'
+	
+	$(dynamicAppSelector).on('click.sammy_front_runner', 'a', function(e){
+		var $t = $(e.currentTarget)
+		, encodedHash = $t.attr('href')
+		
+		// if encodedHash starts with "#.." indicating start of relative hash
+		if (encodedHash.substr(0, 3) === '#..'){
+			var resolvedURL = $t.prop('href').split(encodedHash)
+			// if there is nothing trailing the relative hash fragment in resolved URL
+			if (resolvedURL.length === 2 && resolvedURL[1] === ''){
+				var newHashParts = window.location.hash.split('/')
+				// regardless of if the end was "/" (resulting in last string of "") or "file.ext", it's not a name of "dir". Dropping.
+				newHashParts.pop()
+				// chopping off "#" and splitting the dirs in new relative hash
+				var encodedHashParts = encodedHash.substr(1, encodedHash.length).split('/')
+				, section
+				while(encodedHashParts.length){
+				    section = encodedHashParts.shift()
+				    if (section === "..") {
+				        if (newHashParts.length > 1 /* we are keeping '#' in place */) {newHashParts.pop()}
+				    }
+				    else if (section === ".") {}
+				    else {newHashParts.push(section)}
+				}
+				var newHash = newHashParts.join('/')
+				$t.attr('href', newHash)
+				$t.prop('href', resolvedURL[0] + newHash)
+			} 
+		}
+		return true;
+	})
 	
 	// All of the class definition code expects that DOM IS NOT LOADED YET.
 	// everything is done through predefined closures and callbacks that WILL
@@ -29,7 +61,7 @@ return function($) {
 		    this.debug = false
 		    this.run_interval_every = 300
 		    this.template_engine = null
-		    this.element_selector = '#main_content_wrap'
+		    this.element_selector = dynamicAppSelector
 		    this.use('GoogleAnalytics')
 		})
 		
