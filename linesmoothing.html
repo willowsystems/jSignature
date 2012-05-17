@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Product">
+<head>
+<meta charset='utf-8' />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
+<meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile. "device-HEIGHT" is intentional  -->
+<meta name="name" content="jSignature - Draw signature in the browser" />
+<meta itemprop="name" content="jSignature - Draw signature in the browser">
+<meta name="description" content="jSignature is a signature capture applet made for browsers. It is written in JavaScript and supports many desktop and mobile browsers. It's so easy to use and integrate, you would have no excuse not to use it." />
+<meta itemprop="description" content="jSignature is a signature capture applet made for browsers. It is written in JavaScript and supports many desktop and mobile browsers. It's so easy to use and integrate, you would have no excuse not to use it.">
+<link rel="stylesheet" type="text/css" media="screen" href="css/stylesheet.css">
+<title>jSignature</title>
+<script src="js/libs/modernizr.min.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="js/libs/flashcanvas.js"></script>
+<![endif]-->
+<script type="text/javascript">
+	function InjectScript(path){
+	    var g=document.createElement('script')
+	    , s=document.getElementsByTagName('script')[0]
+	    g.async = true
+	    g.src=path
+	    s.parentNode.insertBefore(g,s)
+	}
+	function InjectCSS(cssbody) {
+	    var styletag = document.createElement('style')
+	    styletag.appendChild(document.createTextNode(cssbody))
+	    document.getElementsByTagName("head")[0].appendChild(styletag)
+	}
+</script>
+</head>
+<body>
+<script type="text/javascript">
+	InjectCSS(".defaultview {display: none;}")
+</script>
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+<header class="inner">
+
+<hgroup class="shrinkwidth_parent">
+<span><!-- used for shrinking the width of content div -->
+<div class="shrinkwidth_subject">
+<span id="project_title">jSignature</span><span>&nbsp;</span>
+<span id="project_tagline">Draw signature in the browser.</span>
+</div>
+</span>
+</hgroup>
+
+</header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+
+<section id="menu" class="inner">
+<nav class="shrinkwidth_parent">
+<span><!-- used for shrinking the width of content div -->
+<div class="shrinkwidth_subject">
+	<a class="menuitem" href="#/"><div>About</div></a>
+	<a class="menuitem" href="#/demo/"><div>Demo</div></a>
+	<a class="menuitem sourcecodelink" href="https://github.com/willowsystems/jSignature"><div>Source Code</div></a>
+</div>
+</span>
+</nav>
+</section>
+
+<section id="demo" class="inner">
+</section>
+
+<section id="about" class="inner defaultview">
+<article id="article_linesmoothing">
+<h2>Line Smoothing</h2>
+
+<p>jSignature is a jQuery plugin which simplifies creation of a signature capture field in the browser window, allowing a user to draw a signature using mouse, pen, or finger. </p>
+
+<p>All <em>major</em> desktop, tablet and phone browsers are supported. HTML5 Canvas element is used by default. We fall back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (Iinternet Explorer v.8 and lower). </p>
+<p>  All signature data is captured and stored internally as vectors. Same signature can be rerendered using variety of postproduction filters (scale, colorize, thicken etc) to improve presentation on printed media, small screens etc.</p>
+<p>  Real-time jSignature renders only the device-appropriate "prettiest" approximation of what we capture. Capture of data is always same - we capture as many movement coordinates as possible. Rendering of strokes differs per browser's capabilities, efficiency of the device, screen size.<p/>
+<strong>This degrading and enhancing of screen representation of the captured signature is done on purpose to insure that rendering does not impead on the responsiveness of capture.</strong><br/>
+For example, on slow rendering devices (Android Browser, FlashCanvas-based Canvas emulation) smoothing is kicked up a notch to compensate for large gaps in captured stroke coordinates - a result of inefficiency of capture device. In all cases, customer shold be pleased by responsiveness and beauty of the drawing.</li>
+<p>jSignature makes it easy to pluck itself into an existing styled site. jSignature automatically detects the colors used on the wrapping element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens) and automatically rescales the drawing area and signature when parent element changes size.</p>
+
+</article>
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p style="text-align: center">
+<span>Like what you see? <span style="display:inline-block; vertical-align:middle"><g:plusone size="medium" annotation="none">G +1</g:plusone></span> this page</span><span class="horizontalspanseparator">|</span><span><a href="https://plus.google.com/117957737400016616017?prsrc=3" rel="publisher">Join jSignature on<img src="https://ssl.gstatic.com/images/icons/gplus-16.png" alt="" style="display:inline-block; vertical-align:middle;border:0;width:16px;height:16px;margin:0;padding:0;margin-left:0.5em;"/></a></span><span class="horizontalspanseparator">|</span><span class="copyright">Project is sponsored in part by <a href="http://willow-systems.com/">Willow Systems Corp</a></span>
+</p>
+</footer>
+</div>
+</body>
+</html>
