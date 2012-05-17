@@ -1,3 +1,7 @@
+/** @preserve
+ * Copyright 2012 Willow Systems Corporation (willow-systems.com)
+*/
+
 ;(function($){
 	"use strict"
 

@@ -7,6 +7,8 @@ define(function() {
  * This is a double-wrap: we return function pointer that is ran against
  * depends in loader, that, in-turn returns an application isntance, that,
  * in-turn is ran in document.on("ready" as appinstance.Run()
+ * 
+ * Copyright 2012 Willow Systems Corporation (willow-systems.com)
  */
 return function($) {
 	'use strict'
