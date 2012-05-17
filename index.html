@@ -19,6 +19,7 @@
 	function InjectScript(path){
 	    var g=document.createElement('script')
 	    , s=document.getElementsByTagName('script')[0]
+	    g.async = true
 	    g.src=path
 	    s.parentNode.insertBefore(g,s)
 	}
@@ -231,7 +232,7 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p style="text-align: center">
-<span>Like what you see? <span style="display:inline-block; vertical-align:middle"><g:plusone size="medium" annotation="none"></g:plusone></span> this page</span><span class="horizontalspanseparator">|</span><span><a href="https://plus.google.com/117957737400016616017?prsrc=3" rel="publisher">Join jSignature on<img src="https://ssl.gstatic.com/images/icons/gplus-16.png" alt="" style="display:inline-block; vertical-align:middle;border:0;width:16px;height:16px;margin:0;padding:0;margin-left:0.5em;"/></a></span><span class="horizontalspanseparator">|</span><span class="copyright">Project is sponsored in part by <a href="http://willow-systems.com/">Willow Systems Corp</a></span>
+<span>Like what you see? <span style="display:inline-block; vertical-align:middle"><g:plusone size="medium" annotation="none">G +1</g:plusone></span> this page</span><span class="horizontalspanseparator">|</span><span><a href="https://plus.google.com/117957737400016616017?prsrc=3" rel="publisher">Join jSignature on<img src="https://ssl.gstatic.com/images/icons/gplus-16.png" alt="" style="display:inline-block; vertical-align:middle;border:0;width:16px;height:16px;margin:0;padding:0;margin-left:0.5em;"/></a></span><span class="horizontalspanseparator">|</span><span class="copyright">Project is sponsored in part by <a href="http://willow-systems.com/">Willow Systems Corp</a></span>
 </p>
 </footer>
 </div>
@@ -249,18 +250,20 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 <script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
 <script src="js/main.js"></script>
 <script>
-	if(location.host !== 'localhost'){
+	if(location.host !== 'localhost' && location.protocol !== 'file:'){
 		// Google Analytics
 		var _gaq=[['_setAccount','UA-31405468-1'],['_trackPageview']]; 
-		InjectScript(('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js')
-	}
+		InjectScript(
+			(
+				'https:' == document.location.protocol ? 
+				'https://ssl' :
+				'http://www'
+			) + '.google-analytics.com/ga.js'
+		)
 
-    // plus one button support
-    ;(function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
+	    // plus one button support
+	    InjectScript('https://apis.google.com/js/plusone.js')
+	}
 </script>
 </body>
 </html>
