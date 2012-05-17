@@ -253,8 +253,10 @@ form {
 }
 
 img {
-  width: 100%;
   max-width: 100%;
+  display: block;   
+  margin-left: auto;   
+  margin-right: auto; 
 }
 
 /*******************************************************************************
@@ -369,6 +371,7 @@ nav a div{
   background: #f2f2f2;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
+  min-height: 40em;
 }
 
 #footer_wrap {

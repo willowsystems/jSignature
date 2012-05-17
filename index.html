@@ -15,6 +15,19 @@
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/libs/flashcanvas.js"></script>
 <![endif]-->
+<script type="text/javascript">
+	function InjectScript(path){
+	    var g=document.createElement('script')
+	    , s=document.getElementsByTagName('script')[0]
+	    g.src=path
+	    s.parentNode.insertBefore(g,s)
+	}
+	function InjectCSS(cssbody) {
+	    var styletag = document.createElement('style')
+	    styletag.appendChild(document.createTextNode(cssbody))
+	    document.getElementsByTagName("head")[0].appendChild(styletag)
+	}
+</script>
 </head>
 <body>
 
@@ -52,7 +65,7 @@
 <section id="demo" class="inner">
 </section>
 
-<section id="about" class="inner">
+<section id="about" class="inner defaultview">
 <article id="article_about">
 <h2>About jSignature</h2>
 
@@ -228,14 +241,6 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 <script>
 	//make it safe to use console.log always
 	(function(b) { function c() { } for (var d = "assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn".split(","), a; a = d.pop(); ) { b[a] = b[a] || c } })((function() {try { console.log(); return window.console; } catch (err) {return window.console = {};}})());
-
-	function InjectScript(path){
-	    var g=document.createElement('script')
-	    , s=document.getElementsByTagName('script')[0]
-	    
-	    g.src=path
-	    s.parentNode.insertBefore(g,s)
-	}
 
 	;(Object.keys && String.prototype.trim && Date.prototype.toISOString && Array.prototype.forEach && Array.prototype.indexOf && Array.prototype.map) || InjectScript('js/libs/augment.min.js')
 	;window.JSON || InjectScript('js/libs/json3.min.js')
