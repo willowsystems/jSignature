@@ -16,7 +16,7 @@ return function($) {
 	'use strict'
 	
 	var namespace = 'jSignatureHome'
-	, dynamicAppSelector = '#main_content_wrap'
+	, dynamicAppSelector = '#frontstage'
 		
 	// All of the class definition code expects that DOM IS NOT LOADED YET.
 	// everything is done through predefined closures and callbacks that WILL

@@ -18,7 +18,7 @@ define(function (require){
 
 		// Everything here will be ran again and again on every request for this route
 
-		var ctx = this
+		var context = this
 
 		document.title = "jSignature - Demo"
 
@@ -26,11 +26,9 @@ define(function (require){
 			['jquery', 'pubsub','jsignature']
 			, function($, PubSub){
 				
-				console.log("Done loading Depends. CTX is: ", ctx)
-
 				var PS = new PubSub()
 				
-	            $('#demo').html('<div id="signatureparent">jSignature inherits colors from here - parent element<div id="signature"></div></div><div id="tools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
+	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from here - parent element<div id="signature"></div></div><div id="tools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
 	            
 	            var $sigdiv = $('#signature').jSignature()
 	        	, $tools = $('#tools')
@@ -66,7 +64,6 @@ define(function (require){
 	        			}
 	        		}
 	        	}).appendTo($tools)
-
 	        	
 	        	$('<input type="button" value="Reset">').bind('click', function(e){
 	        		$sigdiv.jSignature('reset')
