@@ -236,7 +236,7 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </p>
 </footer>
 </div>
-
+<script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
@@ -247,7 +247,6 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 	;window.JSON || InjectScript('js/libs/json3.min.js')
 	;window.jQuery || InjectScript('js/libs/jquery.min.js')
 </script>
-<script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
 <script src="js/main.js"></script>
 <script>
 	if(location.host !== 'localhost' && location.protocol !== 'file:'){
