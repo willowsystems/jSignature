@@ -91,7 +91,7 @@ return function($) {
 		, encodedHash = $t.attr('href')
 		
 		// if encodedHash starts with "#.." indicating start of relative hash
-		if (encodedHash.substr(0, 3) === '#..'){
+		if (encodedHash.substr(0, 2) === '#.'){
 			var resolvedURL = $t.prop('href').split(encodedHash)
 			// if there is nothing trailing the relative hash fragment in resolved URL
 			if (resolvedURL.length === 2 && resolvedURL[1] === ''){
