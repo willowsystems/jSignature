@@ -39,10 +39,14 @@ return function($) {
 		function deriveRequireablePath(context, path){
 
 			var pathParts = path.split("/")
-			, notAFolder = pathParts.pop()
-			, folderName = pathParts.join('/')
-			, mainjsPath = folderName + '/' + 'main'
+			, hashArguments = pathParts.pop()
+			, hashFolder = pathParts.join('/')
+			, mainjsPath = hashFolder + '/' + 'main'
 			, urlPrefix = String(window.location.href).split(window.location.hash)[0]
+
+			context.pathURI = urlPrefix
+			context.pathFolder = hashFolder
+			context.pathArguments = hashArguments
 
 			require([urlPrefix + mainjsPath])
 			.then(
@@ -53,11 +57,14 @@ return function($) {
 					// context.app.swap("404 - Not Found")
 					document.title = "404 - Not Found"
 					context.app.notFound()
-				} 
+				}
 			)
 		}
 		
 		// ROUTES Have to be defined from complex to simple. Otherwise the shortest match will pick it up first.
+		app.sammyapp.route('get', /#\/$/, function() {
+			this.app.setLocation("#/about/")
+		})
 		app.sammyapp.route('get', /#\/(.*)/, function() {
 			document.title = APP_NAME
 			deriveRequireablePath(this, this.params.splat[0])
