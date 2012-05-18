@@ -31,7 +31,12 @@
 </script>
 </head>
 <body>
-
+<script type="text/javascript">
+	// Default view is there for JavaScrip-less browsers. 
+	// If we can run this, we can run our AJAX CMS immediately next
+	// and need to hide this section to avoid flash of content.
+	InjectCSS('.defaultview {display: none;}')
+</script>
 <!-- HEADER -->
 <div id="header_wrap" class="outer">
 <header class="inner">
@@ -245,6 +250,20 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 	;(Object.keys && String.prototype.trim && Date.prototype.toISOString && Array.prototype.forEach && Array.prototype.indexOf && Array.prototype.map) || InjectScript('js/libs/augment.min.js')
 	;window.JSON || InjectScript('js/libs/json3.min.js')
 	;window.jQuery || InjectScript('js/libs/jquery.min.js')
+</script>
+<script id="defaultviewholder" type="text/html"></script>
+<script type="text/javascript">
+	;(function(source, destination){ 
+		var c = source.childNodes		
+		while (c.length){
+			destination.appendChild(c[0]) 
+		}
+		var p = source.parentNode
+		p.removeChild(source)
+	})(
+		document.getElementById('about') 
+		, document.getElementById("defaultviewholder")
+	)
 </script>
 <script src="js/main.js"></script>
 <script>

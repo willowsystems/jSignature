@@ -65,6 +65,11 @@ return function($) {
 		app.sammyapp.route('get', /#\/$/, function() {
 			this.app.setLocation("#/about/")
 		})
+		app.sammyapp.route('get', /#\/about\/$/, function() {
+			this.app.swap(
+				$('#defaultviewholder').html()
+			)
+		})
 		app.sammyapp.route('get', /#\/(.*)/, function() {
 			document.title = APP_NAME
 			deriveRequireablePath(this, this.params.splat[0])
