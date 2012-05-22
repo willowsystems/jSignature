@@ -384,18 +384,19 @@ nav a div{
 .clearfix { *zoom: 1; }
 
 
+
 canvas { border: 1px dotted #000;}
 #signatureparent {color:darkblue;background-color:lightgrey;}
 
-#demo div {
+#demotools div {
 	margin-top:1em;
 	margin-bottom:1em;
 }
-#demo input {
+#demotools input {
 	padding: .5em;
 	margin: .5em;
 }
-#demo select {
+#demotools select {
 	padding: .5em;
 	margin: .5em;
 }

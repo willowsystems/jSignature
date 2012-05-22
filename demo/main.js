@@ -1,6 +1,6 @@
 ;(function(){
 
-define(function (require){
+define(function (){
 	'use strict'
 
 	// default action is always to return an executable object - function - upon load.
@@ -28,10 +28,10 @@ define(function (require){
 				
 				var PS = new PubSub()
 				
-	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from here - parent element<div id="signature"></div></div><div id="tools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
+	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from here - parent element<div id="signature"></div></div><div id="demotools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
 	            
 	            var $sigdiv = $('#signature').jSignature()
-	        	, $tools = $('#tools')
+	        	, $tools = $('#demotools')
 	        	, $extraarea = $('#displayarea')
 	        	, export_plugins = $sigdiv.jSignature('listPlugins','export')
 	        	, chops = ['<span><b>Extract signature data as: </b></span><select>','<option value="">(select export format)</option>']
@@ -117,4 +117,4 @@ define(function (require){
 	}
 })
 
-}).call(typeof window === 'obejct' ? window : this )
+})()
