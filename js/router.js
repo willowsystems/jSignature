@@ -33,7 +33,8 @@ return function($) {
 		    this.run_interval_every = 300
 		    this.template_engine = null
 		    this.element_selector = dynamicAppSelector
-		    // this.use('GoogleAnalytics')
+		    this.use('GoogleAnalytics')
+		    this.use('RelativeHash', '#')
 		})
 
 		function deriveRequireablePath(context, path){
@@ -85,37 +86,6 @@ return function($) {
 		    console.log(this.APP_NAME + " is running")
 		}
 	}
-
-	$(dynamicAppSelector).on('click.sammy_front_runner', 'a', function(e){
-		var $t = $(e.currentTarget)
-		, encodedHash = $t.attr('href')
-		
-		// if encodedHash starts with "#.." indicating start of relative hash
-		if (encodedHash.substr(0, 2) === '#.'){
-			var resolvedURL = $t.prop('href').split(encodedHash)
-			// if there is nothing trailing the relative hash fragment in resolved URL
-			if (resolvedURL.length === 2 && resolvedURL[1] === ''){
-				var newHashParts = window.location.hash.split('/')
-				// regardless of if the end was "/" (resulting in last string of "") or "file.ext", it's not a name of "dir". Dropping.
-				newHashParts.pop()
-				// chopping off "#" and splitting the dirs in new relative hash
-				var encodedHashParts = encodedHash.substr(1, encodedHash.length).split('/')
-				, section
-				while(encodedHashParts.length){
-				    section = encodedHashParts.shift()
-				    if (section === "..") {
-				        if (newHashParts.length > 1 /* we are keeping '#' in place */) {newHashParts.pop()}
-				    }
-				    else if (section === ".") {}
-				    else {newHashParts.push(section)}
-				}
-				var newHash = newHashParts.join('/')
-				$t.attr('href', newHash)
-				$t.prop('href', resolvedURL[0] + newHash)
-			} 
-		}
-		return true;
-	})
 
 	// 2. returning class's instance
 	return new RouterClass($, namespace) // notice that this is INITED app, but not started 
