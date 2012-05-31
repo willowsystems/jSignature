@@ -1,0 +1,1 @@
+http://localhost/jquery-jsignature/src/#/about/linesmoothing/ content_is_ready
