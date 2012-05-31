@@ -37,7 +37,7 @@ define(function (){
 					var converter = new MD.Converter();
 					var html = converter.makeHtml(
 						text.split('{{contentfolder}}').join(contentfolder)
-					)
+					) + '<div id="content_is_ready" style="display:none;"></div>'
 					moduleLevelCache.articleHtmlString = html
 					context.app.swap(html)
 				}
