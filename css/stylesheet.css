@@ -358,6 +358,16 @@ nav a.sourcecodelink:hover{
   background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
 }
 
+nav a.downloadlink {
+  padding-right: 45px;
+  background: url('../images/icon_download.png') #327143 no-repeat 95% 50%;
+}
+
+nav a.downloadlink:hover{
+  background: url('../images/icon_download.png') #429659 no-repeat 95% 50%;
+}
+
+
 nav a div{
   display:table-cell;
   vertical-align:middle;
