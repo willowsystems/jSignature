@@ -80,13 +80,13 @@
 
 <p>An extra effort is made to make the strokes look pretty on the screen while these are drawn by the signor. Ingenious <a href="#./linesmoothing/">line smoothing (pixel de-noising + curve fitting) and pressure simulation techniques were put together specifically for jSignature</a>.</p>
 
-<p>All <em>major</em> desktop, tablet and phone browsers are supported. HTML5 Canvas element is used by default. We fall back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (Iinternet Explorer v.8 and lower). </p>
+<p>All <em>major</em> desktop, tablet and phone browsers are supported. HTML5 Canvas element is used by default. We fall back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (Internet Explorer v.8 and lower). </p>
 
 <p>All signature data is captured and stored internally as vectors. Same signature can be rerendered using variety of postproduction filters (scale, colorize, thicken etc) to improve presentation on printed media, small screens etc.</p>
 
 <p>Real-time jSignature renders only the device-appropriate "prettiest" approximation of what we capture. Capture of data is always same - we capture as many movement coordinates as possible. Rendering of strokes differs per browser's capabilities, efficiency of the device, screen size.<p/>
-<p><strong>This degrading and enhancing of screen representation of the captured signature is done on purpose to insure that rendering does not impead on the responsiveness of capture.</strong><p/>
-<p>For example, on slow rendering devices (Android Browser, FlashCanvas-based Canvas emulation) smoothing is kicked up a notch to compensate for large gaps in captured stroke coordinates - a result of inefficiency of capture device. In all cases, customer shold be pleased by responsiveness and beauty of the drawing.<p/>
+<p><strong>This degrading and enhancing of screen representation of the captured signature is done on purpose to insure that rendering does not impede on the responsiveness of capture.</strong><p/>
+<p>For example, on slow rendering devices (Android Browser, FlashCanvas-based Canvas emulation) smoothing is kicked up a notch to compensate for large gaps in captured stroke coordinates - a result of inefficiency of capture device. In all cases, customer should be pleased by responsiveness and beauty of the drawing.<p/>
 
 <p>jSignature makes it easy to pluck itself into an existing styled site. jSignature automatically detects the colors used on the wrapping element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens) and automatically rescales the drawing area and signature when parent element changes size.</p>
 
@@ -104,7 +104,7 @@
 
 <ol>
 <li> Code that prepares a Canvas element.
-It includes detection of browser features, maximizing a canvas within the confines of a div, setting up emulated Canvas using Flashcanvas, when needed.</li>
+It includes detection of browser features, maximizing a canvas within the confines of a div, setting up emulated Canvas using FlashCanvas, when needed.</li>
 <li> Code that handles actual signature capture + data import / export API.
 It attaches and listens to movement event handlers, stores stroke data inside data structure, handles API calls.</li>
 <li> Plugins that help you get the signature data in convenient for you format, like raw data coordinates, image, compressed url-compatible string, SVG.</li>
@@ -130,7 +130,7 @@ It attaches and listens to movement event handlers, stores stroke data inside da
 <p>Explained:</p>
 
 <ul>
-<li>  The <code>[if lt IE 9]</code> part loads Flashcanvas library for IE less than 9. (Flashcanvas is supported <strong>only on IE</strong>, so, there is no point doing feature detection.)</li>
+<li>  The <code>[if lt IE 9]</code> part loads FlashCanvas library for IE less than 9. (FlashCanvas is supported <strong>only on IE</strong>, so, there is no point doing feature detection.)</li>
 <li>  Then we load jSignature plugin.</li>
 <li>  Next we have the <code>div</code> inside which the canvas element will be created (You cannot reuse a canvas element at this time. Plugin creates its own Canvas elem inside the DIV.)</li>
 <li>  Lastly, the script invokes the signature widget within the specified DIV.</li>
@@ -190,8 +190,8 @@ What this data is good for is running stats (size, position of signature on the 
 <li>  <code>base30</code> (alias <code>image/jSignature;base30</code>) (EXPORT AND IMPORT) (VECTOR) data format is a Base64-spirited compression format tuned for absurd compactness and native url-compatibility. It is "native" data structure compressed into a compact string representation of all vectors. 
 Code examples (.Net, Python) detailing decompression of this format into render-able form (SVG, language-native coordinate arrays) are provided in the <code>extras</code> folder.
 One of possible ways of communicating the data to the server is JSONP, which has a practical URL length limit (imposed by IE, of course) of no more than 2000+ characters. This compression format is natively URL-compatible without a need for re-encoding, yet will fit into 2000 characters for most non-complex signatures.</li>
-<li>  <code>svg</code> (alias <code>image/svg+xml</code>) (EXPORT ONLY) (VECTOR)  data format produces the signature as an SVG image (SVG XML text). All strokes are denoised and smoothed.
-This format is a good medium between "easy to view" and "hightly scalable." Viewing SVGs is natively supported in majority of today's browsers and, yet, this format can be infinitely scaled and enhanced for print. Data is textual, allowing for easy storage and transfer.
+<li>  <code>svg</code> (alias <code>image/svg+xml</code>) (EXPORT ONLY) (VECTOR)  data format produces the signature as an SVG image (SVG XML text). All strokes are de-noised and smoothed.
+This format is a good medium between "easy to view" and "highly scalable." Viewing SVGs is natively supported in majority of today's browsers and, yet, this format can be infinitely scaled and enhanced for print. Data is textual, allowing for easy storage and transfer.
 The call to <code>jSIgnature("getData","svg")</code> returns an array of form <code>["image/svg+xml","svg xml here"]</code>. </li>
 <li>  <code>svgbase64</code> (alias <code>image/svg+xml;base64</code>) (EXPORT ONLY) (VECTOR)  This is same as "svg" plugin, but the SVG XML text is compressed using base64 encoding. Although many browsers now have built-in base64 encoder ( <code>btoa()</code> ), some, like Internet Explorer do not. This plugin has its own (short and efficient) copy of software-based base64 encoder which is invoked on the browsers lacking <code>btoa()</code>. 
 The call to <code>jSignature("getData","svgbase64")</code> returns an array of form <code>["image/svg+xml;base64","base64-encoded svg xml here"]</code>. This two-member array is rather easy to turn into data-url-formatted string (<code>"data:" + data.join(",")</code>) or turn into args and pass to server as form values.</li>
@@ -207,7 +207,7 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 <li>  Androids 1.6 -2.2 (2.3?) dont support canvas.getDataURL method well - the cornerstone of <code>bitmap</code> export functionality. </li>
 <li>  Small screens (mobiles) produce tiny, ugly bitmaps.</li>
 <li>  Bitmap exported by canvas is GARGANTUAN in size compared to vector because it retains all the mid-shaded and background pixels.</li>
-</ul><p>If you want to force yourself to use only Black on top of White signature capture web page style forever, DO use bitmap export. If you want to have your database admin scream at you because backup of database with all that bitmap data takes more than a day, DO use bitmap export. If you want your sales / business dept to scream at you because your signature capture format cannot be easily integrated into their new carefully-styled, wizbang product / service, DO use bitmap export. If you want to explain why siganture format export you chose does not work on all target platforms, DO use bitmap export. If you want to take the easy route now, and make the the IT person that will come in after you are fired do the difficult task of applying ImageMagic wisardry upon a mess of colored pixels you decided to collect, DO use bitmap export format.</p>
+</ul><p>If you want to force yourself to use only Black on top of White signature capture web page style forever, DO use bitmap export. If you want to have your database admin scream at you because backup of database with all that bitmap data takes more than a day, DO use bitmap export. If you want your sales / business dept to scream at you because your signature capture format cannot be easily integrated into their new carefully-styled, wizbang product / service, DO use bitmap export. If you want to explain why siganture format export you chose does not work on all target platforms, DO use bitmap export. If you want to take the easy route now, and make the the IT person that will come in after you are fired do the difficult task of applying ImageMagic wizardry upon a mess of colored pixels you decided to collect, DO use bitmap export format.</p>
 
 <p>If the use of the captured signature has anything to do with "business" or "printing" or "multiple presentation venues" use the Vector formats like "base30" or "svg" data and enhance + render that in postproduction. Decompression and sample, rudimentary rendering code (.Net, Python as of Feb 2012) can be found in "extras" folder. You would use these as core that provides loop-able coordinate data arrays for your own rendering logic.</p>
 </article>
