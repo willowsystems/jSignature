@@ -49,12 +49,12 @@ define(function (){
 	        	$(chops.join('')).bind('change', function(e){
 	        		if (e.target.value !== ''){
 	        			var data = $sigdiv.jSignature('getData', e.target.value)
-	        			$.publish(pubsubprefix + 'formatchanged')
+	        			PS.publish(pubsubprefix + 'formatchanged')
 	        			if (typeof data === 'string'){
 	        				$('textarea', $tools).val(data)
 	        			} else if($.isArray(data) && data.length === 2){
 	        				$('textarea', $tools).val(data.join(','))
-	        				$.publish(pubsubprefix + data[0], data);
+	        				PS.publish(pubsubprefix + data[0], data);
 	        			} else {
 	        				try {
 	        					$('textarea', $tools).val(JSON.stringify(data))
