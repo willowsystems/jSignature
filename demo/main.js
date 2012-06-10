@@ -33,6 +33,11 @@ define(function (){
 	            var $sigdiv = $('#signature').jSignature()
 	        	, $tools = $('#demotools')
 	        	, $extraarea = $('#displayarea')
+
+	        	//=====================================
+	        	// setting up controls (select box, reset and undo buttons)
+
+	        	// the select box:
 	        	, export_plugins = $sigdiv.jSignature('listPlugins','export')
 	        	, chops = ['<span><b>Extract signature data as: </b></span><select>','<option value="">(select export format)</option>']
 	        	, name
@@ -49,12 +54,12 @@ define(function (){
 	        	$(chops.join('')).bind('change', function(e){
 	        		if (e.target.value !== ''){
 	        			var data = $sigdiv.jSignature('getData', e.target.value)
-	        			PS.publish(pubsubprefix + 'formatchanged')
+	        			PS.publish('formatchanged')
 	        			if (typeof data === 'string'){
 	        				$('textarea', $tools).val(data)
 	        			} else if($.isArray(data) && data.length === 2){
 	        				$('textarea', $tools).val(data.join(','))
-	        				PS.publish(pubsubprefix + data[0], data);
+	        				PS.publish(data[0], data);
 	        			} else {
 	        				try {
 	        					$('textarea', $tools).val(JSON.stringify(data))
@@ -64,18 +69,60 @@ define(function (){
 	        			}
 	        		}
 	        	}).appendTo($tools)
-	        	
+
+	        	// reset button
 	        	$('<input type="button" value="Reset">').bind('click', function(e){
-	        		$sigdiv.jSignature('reset')
+	        		PS.publish('reset')
 	        	}).appendTo($tools)
 	        	
+	        	PS.subscribe('reset', function(){
+					$sigdiv.jSignature('reset')
+	        	})
+
+	        	$('<span><b> or </b></span>').appendTo($tools)
+
+	        	// undo button
+	        	var undoButton = $('<input type="button" value="Undo Last Stroke" disabled>').bind('click', function(e){
+	        		PS.publish('undo')
+	        	}).appendTo($tools)
+
+	        	PS.subscribe('reset', function(){
+					undoButton.prop('disabled', true)
+	        	})
+
+	        	$sigdiv.on('change', function(e){
+	        		var $this = $(e.target)
+	        		, data = $this.jSignature('getData','native')
+	        		, buttonDisabled = undoButton.prop('disabled')
+
+	        		if (data.length && buttonDisabled) {
+	        			undoButton.prop('disabled', false)
+	        		} else if (!data.length && !buttonDisabled) {
+	        			undoButton.prop('disabled', true)
+	        		}
+	        	})
+
+	        	PS.subscribe('undo', function(){
+					var data = $sigdiv.jSignature('getData','native')
+					if (data.length) {
+						data.pop()
+						$sigdiv.jSignature('setData',data, 'native')
+						if (!data.length) {
+							undoButton.prop('disabled', true)
+						};
+					};
+	        	})
+	        	
+	        	//==================
+	        	// setting up display areas:
+
 	        	$('<div><textarea style="width:100%;height:7em;"></textarea></div>').appendTo($tools)
 	        	
-	        	PS.subscribe(pubsubprefix + 'formatchanged', function(){
+	        	PS.subscribe('formatchanged', function(){
 	        		$extraarea.html('')
 	        	})
 
-	        	PS.subscribe(pubsubprefix + 'image/svg+xml', function(data) {
+	        	PS.subscribe('image/svg+xml', function(data) {
 	        		var i = new Image()
 	        		i.src = 'data:' + data[0] + ';base64,' + btoa( data[1] )
 	        		$(i).appendTo($extraarea)
@@ -88,7 +135,7 @@ define(function (){
 	        		$( "<div>" + message.join("<br/>") + "</div>" ).appendTo( $extraarea )
 	        	});
 
-	        	PS.subscribe(pubsubprefix + 'image/svg+xml;base64', function(data) {
+	        	PS.subscribe('image/svg+xml;base64', function(data) {
 	        		var i = new Image()
 	        		i.src = 'data:' + data[0] + ',' + data[1]
 	        		$(i).appendTo($extraarea)
@@ -101,14 +148,14 @@ define(function (){
 	        		$( "<div>" + message.join("<br/>") + "</div>" ).appendTo( $extraarea )
 	        	});
 	        	
-	        	PS.subscribe(pubsubprefix + 'image/png;base64', function(data) {
+	        	PS.subscribe('image/png;base64', function(data) {
 	        		var i = new Image()
 	        		i.src = 'data:' + data[0] + ',' + data[1]
 	        		$('<span><b>As you can see, one of the problems of "image" extraction (besides not working on some old Androids, elsewhere) is that it extracts A LOT OF DATA and includes all the decoration that is not part of the signature.</b></span>').appendTo($extraarea)
 	        		$(i).appendTo($extraarea)
 	        	});
 	        	
-	        	PS.subscribe(pubsubprefix + 'image/jsignature;base30', function(data) {
+	        	PS.subscribe('image/jsignature;base30', function(data) {
 	        		$('<span><b>This is a vector format not natively render-able by browsers. Format is a compressed "movement coordinates arrays" structure tuned for use server-side. The bonus of this format is its tiny storage footprint and ease of deriving rendering instructions in programmatic, iterative manner.</b></span>').appendTo($extraarea)
 	        	});
 	        	
