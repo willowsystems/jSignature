@@ -227,7 +227,7 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 <article id="article_events">
 <h2>Events</h2>
 
-<p>The dom element upon which jSignature was initialized emits 'change' event immediately after a stroke is done being added to the storage. (In other words, when user is done drawing each stroke. If user draws 3 strokes, this event is emitted 3 times, after each stroke is done.)</p>
+<p>The dom element upon which jSignature was initialized emits a 'change' event immediately after a stroke is done being added to the storage. (In other words, when user is done drawing each stroke. If user draws 3 strokes, this event is emitted 3 times, after each stroke is done.)</p>
 
 <p>Here is how you would bind to that event:</p>
 
@@ -235,6 +235,16 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </code></pre>
 
 <p>Event is emitted asynchronously through a "thread" ( <code>setTimeout(..., 3)</code> ) so you don't need to wrap your event handler into "thread" of any kind, as jSignature widget will go on and will not be waiting for you to be done with your custom event handler logic.</p>
+
+<p>Note that the event is generated through jQuery's 'trigger()' method. This means that the event will not travel up the native DOM tree. This means that only event listeners attached through jQuery (using '.on()', '.bind()', '.live()', '.delegate()') will hear this event.</p>
+
+<p>Also note that the event is "namespaced." This means that when event is generated, it is actually generated as "change.jSignature". All listeners attached with either "change" or "change.jSignature" event names will hear this event. However, you can benefit from the namespacing and make sure that your listener will listen for jSignature's 'change' event only, by attaching a listener with namespace. Example:</p>
+
+<pre><code>$(document.body).on('change.jSignature', function(e){ })
+</code></pre>
+
+<p>When "change" listener is attached *up* the DOM tree, it can pick up a lot of "change" events that do not relate to jSignature. Namespacing the event listener this way ensures that your listener, although attached to the whole document, hears only jSignature's "change" event.</p>
+
 </article>
 
 <article id="article_license">
