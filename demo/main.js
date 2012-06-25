@@ -28,7 +28,7 @@ define(function (){
 				
 				var PS = new PubSub()
 				
-	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from here - parent element<div id="signature"></div></div><div id="demotools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
+	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from parent elements<div id="signature"></div></div><div id="demotools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
 	            
 	            var $sigdiv = $('#signature').jSignature()
 	        	, $tools = $('#demotools')
