@@ -30,6 +30,9 @@ define(function (){
 				
 	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from parent elements<div id="signature"></div></div><div id="demotools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
 	            
+	            var controlbarstyle = 'padding:0; margin:0; width: 100%; height: 0;'
+	            var $controlbar = $('<div class="'+controlbarstyle+'"></div>').appendTo('#signature')
+
 	            var $sigdiv = $('#signature').jSignature()
 	        	, $tools = $('#demotools')
 	        	, $extraarea = $('#displayarea')
@@ -82,23 +85,21 @@ define(function (){
 	        	$('<span><b> or </b></span>').appendTo($tools)
 
 	        	// undo button
-	        	var undoButton = $('<input type="button" value="Undo Last Stroke" disabled>').bind('click', function(e){
-	        		PS.publish('undo')
-	        	}).appendTo($tools)
-
-	        	PS.subscribe('reset', function(){
-					undoButton.prop('disabled', true)
-	        	})
+	        	var undoButtonSytle = 'position:absolute;display:none'
+	        	, $undoButton = $('<input style="'+undoButtonSytle+'" type="button" value="Undo Last Stroke">')
+		        	.bind('click', function(e){
+		        		PS.publish('undo')
+		        	})
+		        	.appendTo($controlbar)
 
 	        	$sigdiv.on('change', function(e){
 	        		var $this = $(e.target)
 	        		, data = $this.jSignature('getData','native')
-	        		, buttonDisabled = undoButton.prop('disabled')
 
-	        		if (data.length && buttonDisabled) {
-	        			undoButton.prop('disabled', false)
-	        		} else if (!data.length && !buttonDisabled) {
-	        			undoButton.prop('disabled', true)
+	        		if (data.length) {
+	        			$undoButton.show()
+	        		} else {
+	        			$undoButton.hide()
 	        		}
 	        	})
 
@@ -107,9 +108,6 @@ define(function (){
 					if (data.length) {
 						data.pop()
 						$sigdiv.jSignature('setData',data, 'native')
-						if (!data.length) {
-							undoButton.prop('disabled', true)
-						};
 					};
 	        	})
 	        	
