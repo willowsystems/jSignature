@@ -28,12 +28,37 @@ define(function (){
 				
 				var PS = new PubSub()
 				
-	            context.app.$element().html('<div id="signatureparent">jSignature inherits colors from parent elements<div id="signature"></div></div><div id="demotools"></div><div><p>Display Area:</p><div id="displayarea"></div></div>').show()
+	            context.app.$element().html(
+					'<div id="signatureparent">'+
+						'jSignature inherits colors from parent elements'+
+						'<div id="signature"></div>'+
+					'</div>'+
+					'<div class="shrinkwidth_parent"><span><div id="demotools" class="shrinkwidth_subject"></div></span></div>'+
+					'<div><textarea style="width:100%;height:7em;"></textarea></div>'+
+					'<div><p>Display Area:</p><div id="displayarea"></div></div>'
+				).show()
 	            
-	            var controlbarstyle = 'padding:0; margin:0; width: 100%; height: 0;'
-	            var $controlbar = $('<div class="'+controlbarstyle+'"></div>').appendTo('#signature')
+	            var UndoButtonRenderer = function(){
+					// this === jSignatureInstance 
+					var undoButtonSytle = 'position:absolute;display:none;margin:0 !important;top:auto;padding: 0.5em !important;'
+					, $undoButton = $('<input type="button" value="Undo last stroke" style="'+undoButtonSytle+'" />')
+						.appendTo(this.$controlbarUpper)
 
-	            var $sigdiv = $('#signature').jSignature()
+					// this centers the button against the canvas.
+					var buttonWidth = $undoButton.width()
+					$undoButton.css(
+						'left'
+						, Math.round(( this.canvas.width - buttonWidth ) / 2)
+					)
+					// IE 7 grows the button. Correcting for that.
+					if ( buttonWidth !== $undoButton.width() ) {
+						$undoButton.width(buttonWidth)
+					}
+
+					return $undoButton
+				}
+
+	            var $sigdiv = $('#signature').jSignature({'UndoButton':UndoButtonRenderer})
 	        	, $tools = $('#demotools')
 	        	, $extraarea = $('#displayarea')
 
@@ -42,7 +67,11 @@ define(function (){
 
 	        	// the select box:
 	        	, export_plugins = $sigdiv.jSignature('listPlugins','export')
-	        	, chops = ['<span><b>Extract signature data as: </b></span><select>','<option value="">(select export format)</option>']
+	        	, chops = [
+					'<span><b>Extract signature data as: </b></span>'
+					, '<select>'
+					, '<option value="">(select export format)</option>'
+	        	]
 	        	, name
 	        	, pubsubprefix = 'DEMO'
 
@@ -59,63 +88,42 @@ define(function (){
 	        			var data = $sigdiv.jSignature('getData', e.target.value)
 	        			PS.publish('formatchanged')
 	        			if (typeof data === 'string'){
-	        				$('textarea', $tools).val(data)
+	        				$('textarea').val(data)
 	        			} else if($.isArray(data) && data.length === 2){
-	        				$('textarea', $tools).val(data.join(','))
+	        				$('textarea').val(data.join(','))
 	        				PS.publish(data[0], data);
 	        			} else {
 	        				try {
-	        					$('textarea', $tools).val(JSON.stringify(data))
+	        					$('textarea').val(JSON.stringify(data))
 	        				} catch (ex) {
-	        					$('textarea', $tools).val('Not sure how to stringify this, likely binary, format.')
+	        					$('textarea').val('Not sure how to stringify this, likely binary, format.')
 	        				}
 	        			}
 	        		}
 	        	}).appendTo($tools)
 
 	        	// reset button
-	        	$('<input type="button" value="Reset">').bind('click', function(e){
-	        		PS.publish('reset')
-	        	}).appendTo($tools)
-	        	
-	        	PS.subscribe('reset', function(){
+				$('<input type="button" value="Reset" disabled>').bind('click', function(e){
+					PS.publish('reset')
+				}).appendTo($tools)
+
+				PS.subscribe('reset', function(){
 					$sigdiv.jSignature('reset')
-	        	})
+				})
 
-	        	$('<span><b> or </b></span>').appendTo($tools)
-
-	        	// undo button
-	        	var undoButtonSytle = 'position:absolute;display:none'
-	        	, $undoButton = $('<input style="'+undoButtonSytle+'" type="button" value="Undo Last Stroke">')
-		        	.bind('click', function(e){
-		        		PS.publish('undo')
-		        	})
-		        	.appendTo($controlbar)
-
-	        	$sigdiv.on('change', function(e){
-	        		var $this = $(e.target)
-	        		, data = $this.jSignature('getData','native')
-
-	        		if (data.length) {
-	        			$undoButton.show()
+				$('#signature').on('change', function(e){
+	        		var undef
+	        		if ($(e.target).jSignature('getData','native').length) {
+	        			$tools.find('input').prop('disabled', false)	        			
 	        		} else {
-	        			$undoButton.hide()
+	        			$tools.find('input').prop('disabled', true)
 	        		}
-	        	})
 
-	        	PS.subscribe('undo', function(){
-					var data = $sigdiv.jSignature('getData','native')
-					if (data.length) {
-						data.pop()
-						$sigdiv.jSignature('setData',data, 'native')
-					};
-	        	})
-	        	
+				})
+
 	        	//==================
 	        	// setting up display areas:
 
-	        	$('<div><textarea style="width:100%;height:7em;"></textarea></div>').appendTo($tools)
-	        	
 	        	PS.subscribe('formatchanged', function(){
 	        		$extraarea.html('')
 	        	})
