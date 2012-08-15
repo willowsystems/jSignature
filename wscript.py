@@ -7,6 +7,10 @@ def importbuild(context):
 		'git show stable:jSignature.min.js > js/libs/jSignature.min.js'.split(' ')
 		, shell = True
 	)
+	subprocess.call(
+		'git show stable:libs/flashcanvas.js > js/libs/flashcanvas.js'.split(' ')
+		, shell = True
+	)
 
 def generateseopages(context):
 	buildparts = context.Node('./buildparts/')
