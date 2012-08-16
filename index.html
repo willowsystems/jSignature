@@ -23,10 +23,22 @@
 	    g.src=path
 	    s.parentNode.insertBefore(g,s)
 	}
-	function InjectCSS(cssbody) {
-	    var styletag = document.createElement('style')
-	    styletag.appendChild(document.createTextNode(cssbody))
-	    document.getElementsByTagName("head")[0].appendChild(styletag)
+	function InjectCSS(cssbody, doc) {
+		if (!doc) {
+			doc = document
+		}
+		var styletag = doc.createElement('style')
+		styletag.type = 'text/css'
+		if(styletag.styleSheet) {
+			styletag.styleSheet.cssText = cssbody
+		} else {
+			styletag.appendChild(doc.createTextNode(cssbody))
+		}
+		if (doc.getElementsByTagName("head").length) {
+			doc.getElementsByTagName("head")[0].appendChild(styletag)
+		} else {
+			doc.body.appendChild(styletag)
+		}
 	}
 </script>
 </head>
