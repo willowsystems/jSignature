@@ -281,15 +281,16 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </script>
 <script id="defaultviewholder" type="text/html"></script>
 <script type="text/javascript">
+	// For SEO we have some default content always visible.
+	// this moves the default content to holder tank to be shown only
+	// when sammy router gets to "about" route.
+	// On IE, "moving" content by anything but ".text" to a "script" node = error.
+	// so:
 	;(function(source, destination){ 
-		var c = source.childNodes		
-		while (c.length){
-			destination.appendChild(c[0]) 
-		}
-		var p = source.parentNode
-		p.removeChild(source)
+		destination.text = source.innerHTML
+		source.parentNode.removeChild(source)
 	})(
-		document.getElementById('about') 
+		document.getElementById('about')
 		, document.getElementById("defaultviewholder")
 	)
 </script>
