@@ -11,7 +11,6 @@
 <meta itemprop="description" content="jSignature is a signature capture applet made for browsers. It is written in JavaScript and supports many desktop and mobile browsers. It's so easy to use and integrate, you would have no excuse not to use it.">
 <link rel="stylesheet" type="text/css" media="screen" href="css/stylesheet.css">
 <title>jSignature</title>
-<script src="js/libs/modernizr.min.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/libs/flashcanvas.js"></script>
 <![endif]-->
@@ -51,25 +50,25 @@
 </script>
 <!-- HEADER -->
 <div id="header_wrap" class="outer">
-<header class="inner">
+<div class="header inner">
 
-<hgroup class="shrinkwidth_parent">
+<div class="hgroup shrinkwidth_parent">
 <span><!-- used for shrinking the width of content div -->
 <div class="shrinkwidth_subject">
 <span id="project_title">jSignature</span><span>&nbsp;</span>
 <span id="project_tagline">Draw signature in the browser.</span>
 </div>
 </span>
-</hgroup>
+</div>
 
-</header>
+</div>
 </div>
 
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
 
-<section id="menu" class="inner">
-<nav class="shrinkwidth_parent">
+<div id="menu" class="section inner">
+<div class="nav shrinkwidth_parent">
 <span><!-- used for shrinking the width of content div -->
 <div class="shrinkwidth_subject">
 	<a class="menuitem" href="#/"><div>About</div></a>
@@ -78,13 +77,13 @@
 	<a class="menuitem sourcecodelink" href="https://github.com/willowsystems/jSignature"><div>Source Code</div></a>
 </div>
 </span>
-</nav>
-</section>
+</div>
+</div>
 
-<section id="frontstage" class="inner"></section>
+<div id="frontstage" class="section inner"></div>
 
-<section id="about" class="inner defaultview">
-<article id="article_about">
+<div id="about" class="section inner defaultview">
+<div id="div_about">
 <h2>About jSignature</h2>
 
 <p><h5>jSignature is a JavaScript widget (a jQuery plugin) that simplifies creation of a signature capture field in a browser window, allowing a user to draw a signature using mouse, pen, or finger.</h5></p>
@@ -115,9 +114,9 @@
 <p>jSignature makes it easy to pluck itself into an existing styled site. jSignature automatically detects the colors used on the wrapping element (text color = pen color, background = background) and auto-picks a pleasing middle-shade for 'decor' (signature line). jSignature adapts well to fixed and variable width web page designs, and various size screens (phones, tablets, computer screens) and automatically rescales the drawing area and signature when parent element changes size.</p>
 
 <p>See <a href="#/demo/" title="Signature Capture Demos">demos here</a>.</p>
-</article>
+</div>
 
-<article id="article_adding">
+<div id="div_adding">
 <h2>Adding jSignature to your page</h2>
 
 <p>jSignature depends on (more or less recent) <strong>jQuery</strong>,  and <strong>(only for IE 7 and 8) on FlashCanvas</strong>. Both are included, for convenience, in the <code>/libs</code> folder of this project, but you can certainly use your own versions. </p>
@@ -159,9 +158,9 @@ It attaches and listens to movement event handlers, stores stroke data inside da
 <li>  Next we have the <code>div</code> inside which the canvas element will be created (You cannot reuse a canvas element at this time. Plugin creates its own Canvas elem inside the DIV.)</li>
 <li>  Lastly, the script invokes the signature widget within the specified DIV.</li>
 </ul>
-</article>
+</div>
 
-<article id="article_api">
+<div id="div_api">
 <h2>API</h2>
 
 <p>The following method becomes exposed on top of jQuery objects: <code>.jSignature(String command, *args)</code></p>
@@ -198,9 +197,9 @@ $sigdiv.jSignature("setData", "data:" + datapair.join(","))
 </code></pre>
 
 <p>See tests and index.html for more examples.</p>
-</article>
+</div>
 
-<article id="article_plugins">
+<div id="div_plugins">
 <h2>Data Import / Export (and Plugins)</h2>
 
 <p>The following plugins (data formats) are part of mainline jSignature minified distributable:</p>
@@ -234,9 +233,9 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </ul><p>If you want to force yourself to use only Black on top of White signature capture web page style forever, DO use bitmap export. If you want to have your database admin scream at you because backup of database with all that bitmap data takes more than a day, DO use bitmap export. If you want your sales / business dept to scream at you because your signature capture format cannot be easily integrated into their new carefully-styled, wizbang product / service, DO use bitmap export. If you want to explain why siganture format export you chose does not work on all target platforms, DO use bitmap export. If you want to take the easy route now, and make the the IT person that will come in after you are fired do the difficult task of applying ImageMagic wizardry upon a mess of colored pixels you decided to collect, DO use bitmap export format.</p>
 
 <p>If the use of the captured signature has anything to do with "business" or "printing" or "multiple presentation venues" use the Vector formats like "base30" or "svg" data and enhance + render that in postproduction. Decompression and sample, rudimentary rendering code (.Net, Python as of Feb 2012) can be found in "extras" folder. You would use these as core that provides loop-able coordinate data arrays for your own rendering logic.</p>
-</article>
+</div>
 
-<article id="article_events">
+<div id="div_events">
 <h2>Events</h2>
 
 <p>The dom element upon which jSignature was initialized emits 'change' event immediately after a stroke is done being added to the storage. (In other words, when user is done drawing each stroke. If user draws 3 strokes, this event is emitted 3 times, after each stroke is done.)</p>
@@ -247,26 +246,26 @@ The call to <code>jSignature("getData","svgbase64")</code> returns an array of f
 </code></pre>
 
 <p>Event is emitted asynchronously through a "thread" ( <code>setTimeout(..., 3)</code> ) so you don't need to wrap your event handler into "thread" of any kind, as jSignature widget will go on and will not be waiting for you to be done with your custom event handler logic.</p>
-</article>
+</div>
 
-<article id="article_license">
+<div id="div_license">
 <h2>License, Copyright</h2>
 
 <p><a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p>
 
 <p>See source header for full and most current Copyright attributions.</p>
-</article>
-</section>
+</div>
+</div>
 </div>
 
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
-<footer class="inner">
+<div class="footer inner">
 <p style="text-align: center">
 <span>Like what you see? <span style="display:inline-block; vertical-align:middle"><g:plusone size="medium" annotation="none">G +1</g:plusone></span> this page</span><span class="horizontalspanseparator">|</span><span>
 <a href="https://plus.google.com/117957737400016616017" rel="publisher">Find us on Google+</a></span><span class="horizontalspanseparator">|</span><span class="copyright">Project is sponsored in part by <a href="http://willow-systems.com/">Willow Systems Corp</a></span>
 </p>
-</footer>
+</div>
 </div>
 <script src="js/libs/curl_plus.min.js"></script><!--  AMD loader. Provides require() and define() -->
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->

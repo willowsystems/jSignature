@@ -102,7 +102,7 @@ p {
   margin: 10px 0 15px 0;
 }
 
-footer p {
+.footer p {
   color: #f2f2f2;
 }
 
@@ -128,7 +128,7 @@ a {
   text-shadow: #0090ff 0px 0px 2px;
 }
 
-footer a:hover {
+.footer a:hover {
   color: #43adff;
   text-shadow: #0090ff 0px 0px 2px;
 }
@@ -316,23 +316,23 @@ Full-Width Styles
 	display:block;
 }
 
-header hgroup{
+.hgroup{
   display:block;
   margin-bottom: 10px;
 } 
-header hgroup span{
+.hgroup span{
   display:inline;
   vertical-align:baseline;
   height: 100%;
 }
 
-nav {
+.nav {
   display: block;
   margin-top: -10px;
   width: 100%;
 }
 
-nav a{
+.nav a{
   display:inline-block; 
   vertical-align:bottom;
   height: 40px;
@@ -345,30 +345,30 @@ nav a{
   box-shadow: 0 0 10px rgba(0,0,0,.5);
 }
 
-nav a:hover{
+.nav a:hover{
   background: #429659;
 }
 
-nav a.sourcecodelink {
+.nav a.sourcecodelink {
   padding-right: 45px;
   background: url('../images/blacktocat.png') #0074ce no-repeat 95% 50%;
 }
 
-nav a.sourcecodelink:hover{
+.nav a.sourcecodelink:hover{
   background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
 }
 
-nav a.downloadlink {
+.nav a.downloadlink {
   padding-right: 45px;
   background: url('../images/icon_download.png') #327143 no-repeat 95% 50%;
 }
 
-nav a.downloadlink:hover{
+.nav a.downloadlink:hover{
   background: url('../images/icon_download.png') #429659 no-repeat 95% 50%;
 }
 
 
-nav a div{
+.nav a div{
   display:table-cell;
   vertical-align:middle;
   height: 40px;
