@@ -730,6 +730,7 @@ function jSignatureClass(parent, options, instanceExtensions) {
 		,'lineWidth' : 0
 		,'minFatFingerCompensation' : -10
 		,'showUndoButton': false
+		,'showShadow' : true
 		,'data': []
 	}
 	
@@ -949,7 +950,7 @@ jSignatureClass.prototype.resetCanvas = function(data){
 
 	ctx.clearRect(0, 0, cw + 30, ch + 30)
 
-	ctx.shadowColor = ctx.fillStyle = settings['background-color']
+	ctx.fillStyle = settings['background-color']
 	if (isCanvasEmulator){
 		// FLashCanvas fills with Black by default, covering up the parent div's background
 		// hence we refill 
@@ -967,7 +968,7 @@ jSignatureClass.prototype.resetCanvas = function(data){
 	basicLine(ctx, lineoffset * 1.5, ch - lineoffset, cw - (lineoffset * 1.5), ch - lineoffset)
 	ctx.strokeStyle = settings.color
 
-	if (!isCanvasEmulator){
+	if (!isCanvasEmulator && settings.showShadow){
 		ctx.shadowColor = ctx.strokeStyle
 		ctx.shadowOffsetX = ctx.lineWidth * 0.5
 		ctx.shadowOffsetY = ctx.lineWidth * -0.6
