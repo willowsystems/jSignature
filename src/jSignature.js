@@ -950,7 +950,7 @@ jSignatureClass.prototype.resetCanvas = function(data){
 
 	ctx.clearRect(0, 0, cw + 30, ch + 30)
 
-	ctx.shadowColor = ctx.fillStyle = settings['background-color']
+	ctx.fillStyle = settings['background-color']
 	if (isCanvasEmulator){
 		// FLashCanvas fills with Black by default, covering up the parent div's background
 		// hence we refill 
