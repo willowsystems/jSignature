@@ -453,7 +453,10 @@ function DataEngine(storageObject, context, startStrokeFn, addToStrokeFn, endStr
 var basicDot = function(ctx, x, y, size){
 	var fillStyle = ctx.fillStyle
 	ctx.fillStyle = ctx.strokeStyle
-	ctx.fillRect(x + size / -2 , y + size / -2, size, size)
+	ctx.beginPath()
+	ctx.arc(x, y, size / 2, 0, Math.PI*2)
+	ctx.closePath()
+	ctx.fill()
 	ctx.fillStyle = fillStyle
 }
 , basicLine = function(ctx, startx, starty, endx, endy){
