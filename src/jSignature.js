@@ -730,6 +730,7 @@ function jSignatureClass(parent, options, instanceExtensions) {
 		,'lineWidth' : 0
 		,'minFatFingerCompensation' : -10
 		,'showUndoButton': false
+		,'showShadow' : true
 		,'data': []
 	}
 	
@@ -967,7 +968,7 @@ jSignatureClass.prototype.resetCanvas = function(data){
 	basicLine(ctx, lineoffset * 1.5, ch - lineoffset, cw - (lineoffset * 1.5), ch - lineoffset)
 	ctx.strokeStyle = settings.color
 
-	if (!isCanvasEmulator){
+	if (!isCanvasEmulator && settings.showShadow){
 		ctx.shadowColor = ctx.strokeStyle
 		ctx.shadowOffsetX = ctx.lineWidth * 0.5
 		ctx.shadowOffsetY = ctx.lineWidth * -0.6
