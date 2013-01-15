@@ -731,6 +731,7 @@ function jSignatureClass(parent, options, instanceExtensions) {
 		,'minFatFingerCompensation' : -10
 		,'showUndoButton': false
 		,'data': []
+		,'signatureLine': true
 	}
 	
 	$.extend(settings, getColors($parent))
@@ -960,18 +961,20 @@ jSignatureClass.prototype.resetCanvas = function(data){
 	ctx.lineCap = ctx.lineJoin = "round"
 	
 	// signature line
-	ctx.strokeStyle = settings['decor-color']
-	ctx.shadowOffsetX = 0
-	ctx.shadowOffsetY = 0
-	var lineoffset = Math.round( ch / 5 )
-	basicLine(ctx, lineoffset * 1.5, ch - lineoffset, cw - (lineoffset * 1.5), ch - lineoffset)
-	ctx.strokeStyle = settings.color
+	if(settings.signatureLine) {
+		ctx.strokeStyle = settings['decor-color']
+		ctx.shadowOffsetX = 0
+		ctx.shadowOffsetY = 0
+		var lineoffset = Math.round( ch / 5 )
+		basicLine(ctx, lineoffset * 1.5, ch - lineoffset, cw - (lineoffset * 1.5), ch - lineoffset)
+		ctx.strokeStyle = settings.color
 
-	if (!isCanvasEmulator){
-		ctx.shadowColor = ctx.strokeStyle
-		ctx.shadowOffsetX = ctx.lineWidth * 0.5
-		ctx.shadowOffsetY = ctx.lineWidth * -0.6
-		ctx.shadowBlur = 0					
+		if (!isCanvasEmulator){
+			ctx.shadowColor = ctx.strokeStyle
+			ctx.shadowOffsetX = ctx.lineWidth * 0.5
+			ctx.shadowOffsetY = ctx.lineWidth * -0.6
+			ctx.shadowBlur = 0					
+		}
 	}
 	
 	// setting up new dataEngine
@@ -1203,13 +1206,100 @@ var GlobalJSignatureObjectInitializer = function(window){
 		}
 		*/
 	}
+	
+	var scaleCanvas = function(canvas, scaleOptions) {
+		if(!scaleOptions) return canvas;
+		
+		scaleOptions = $.extend({}, {'lock': true}, scaleOptions);
+		
+		// Establish width/height
+		var width = parseInt(scaleOptions.width);
+		var height = parseInt(scaleOptions.height);
+		if(!width && !height) {
+			width = canvas.width;
+			height = canvas.height;
+		} else if(width && !height) {
+			if(scaleOptions.lock) height = Math.round((canvas.height * width) / canvas.width);
+			else height = canvas.height;
+		} else if(!width && height) {
+			if(scaleOptions.lock) width = Math.round((canvas.width * height) / canvas.height);
+			else width = canvas.width;
+		}
+		
+		// Scale if requested
+		var scaleX = parseFloat(scaleOptions.scaleX);
+		var scaleY = parseFloat(scaleOptions.scaleY);
+		if(scaleX) {
+			width = Math.round(width * scaleX);
+			if(scaleOptions.lock) height = Math.round(height * scaleX);
+		}
+		if(scaleY) {
+			height = Math.round(height * scaleY);
+			if(scaleOptions.lock) width = Math.round(width * scaleY);
+		}
+		
+		// Make a copy, alter and return that
+		var canvascopy = document.createElement("canvas");
+		canvascopy.width = width;
+		canvascopy.height = height;
+		canvascopy.style.width = width + "px";
+		canvascopy.style.height = height + "px";
+
+		var ctx = canvascopy.getContext("2d");
+		ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, width, height);
+		
+		// Trim the edges
+		if(scaleOptions.trim) {
+			var imageData = ctx.getImageData(0, 0, canvascopy.width, canvascopy.height);
+			imageData = imageData.data;
+			var red = 0, green = 0, blue = 0, alpha = 0, x = 0, y = 0, maxX = 0, maxY = 0, minX = canvascopy.width, minY = canvascopy.height;
+			for(var i = 0; i < imageData.length; i++) {
+				// Pull color values
+				red = imageData[i];
+				green = imageData[++i];
+				blue = imageData[++i];
+				alpha = imageData[++i];
+				
+				// Determine actual drawing area
+				if(red || green || blue || alpha) {
+					if(maxX < x) maxX = x;
+					if(minX > x) minX = x;
+					if(maxY < y) maxY = y;
+					if(minY > y) minY = y;
+				}
+				
+				// Keep track of where we are
+				x++;
+				if(x == canvascopy.width) {
+					y++;
+					x = 0;
+				}
+			}
+			var trimmed_width = maxX - minX;
+			var trimmed_height = maxY - minY;
+			
+			var trimmed_copy = document.createElement("canvas");
+			trimmed_copy.width = trimmed_width;
+			trimmed_copy.height = trimmed_height;
+			trimmed_copy.style.width = trimmed_width + "px";
+			trimmed_copy.style.height = trimmed_height + "px";
+			
+			ctx = trimmed_copy.getContext("2d");
+			ctx.drawImage(canvascopy, minX, minY, trimmed_width, trimmed_height, 0, 0, trimmed_width, trimmed_height);
+			
+			return trimmed_copy;
+		}
+		
+		return canvascopy;
+	}
 
 	var exportplugins = {
 		'default':function(data){return this.toDataURL()}
 		, 'native':function(data){return data}
-		, 'image':function(data){
+		, 'image':function(data, scaleOptions){
 			/*this = canvas elem */
-			var imagestring = this.toDataURL()
+			var scaledCanvas = scaleCanvas(this, scaleOptions);
+			var imagestring = scaledCanvas.toDataURL();
 			
 			if (typeof imagestring === 'string' && 
 				imagestring.length > 4 && 
@@ -1350,13 +1440,14 @@ var GlobalJSignatureObjectInitializer = function(window){
 			}
 			return answer
 		}
-		, 'getData' : function( formattype ) {
+		, 'getData' : function( formattype, scaleOptions ) {
 			var undef, $canvas=this.find('canvas.'+apinamespace).add(this.filter('canvas.'+apinamespace))
 			if (formattype === undef) formattype = 'default'
 			if ($canvas.length !== 0 && exportplugins.hasOwnProperty(formattype)){				
 				return exportplugins[formattype].call(
 					$canvas.get(0) // canvas dom elem
 					, $canvas.data(apinamespace+'.data') // raw signature data as array of objects of arrays
+					, scaleOptions
 				)
 			}
 		}
