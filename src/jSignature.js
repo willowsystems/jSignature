@@ -114,6 +114,7 @@ var PubSubClass = function(context){
 			for (var i = 0, l = currentTopic.length; i < l; i++) {
 				if (currentTopic[i][0] === token.callback) {
 					currentTopic.splice(i, 1)
+					break
 				}
 			}
 		}
