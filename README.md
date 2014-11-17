@@ -96,7 +96,7 @@ Usage examples:
     var datapair = $sigdiv.jSignature("getData", "svgbase64") 
     var i = new Image()
     i.src = "data:" + datapair[0] + "," + datapair[1] 
-    $(i).appendTo($("#someelement") // append the image (SVG) to DOM.
+    $(i).appendTo($("#someelement")) // append the image (SVG) to DOM.
     
     // Getting signature as "base30" data pair
     // array of [mimetype, string of jSIgnature"s custom Base30-compressed format]
