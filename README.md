@@ -6,7 +6,7 @@ jSignature captures signature as vector outlines of the strokes. Although jSigna
 
 A extra effort (through smoothing and pressure simulation) is made to make the strokes look pretty on the screen while these are drawn by the signor.
 
-All major desktop, tablet and phone browsers are supported. HTML5 Canvas element is used by default. We fall back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (Iinternet Explorer v.8 and lower).
+All major desktop, tablet and phone browsers are supported. HTML5 Canvas element is used by default. We fall back on Flash-based Canvas element emulator (FlashCanvas) when actual Canvas is not supported by the browser (Internet Explorer v.8 and lower).
 
 Real-time jSignature renders only the device-appropriate "prettiest" approximation of what we capture. Capture of data is always same - we capture as many movement coordinates as possible. Rendering of strokes differs per browser's capabilities, efficiency of the device, screen size.
 
@@ -96,7 +96,7 @@ Usage examples:
     var datapair = $sigdiv.jSignature("getData", "svgbase64") 
     var i = new Image()
     i.src = "data:" + datapair[0] + "," + datapair[1] 
-    $(i).appendTo($("#someelement") // append the image (SVG) to DOM.
+    $(i).appendTo($("#someelement")) // append the image (SVG) to DOM.
     
     // Getting signature as "base30" data pair
     // array of [mimetype, string of jSIgnature"s custom Base30-compressed format]
