@@ -5,7 +5,7 @@ Copyright (c) 2010 Brinley Ang http://www.unbolt.net
 MIT License <http://www.opensource.org/licenses/mit-license.php> 
 
 */
-;(function() {
+;(function($) {
 
 var apinamespace = 'jSignature'
 
@@ -1389,4 +1389,4 @@ var GlobalJSignatureObjectInitializer = function(window){
 
 GlobalJSignatureObjectInitializer(window)
 
-})();
+})(jQuery);
