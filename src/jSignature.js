@@ -731,6 +731,7 @@ function jSignatureClass(parent, options, instanceExtensions) {
 		,'minFatFingerCompensation' : -10
 		,'showUndoButton': false
 		,'data': []
+		,'hideCanvasLine' : false
 	}
 	
 	$.extend(settings, getColors($parent))
@@ -933,6 +934,7 @@ function jSignatureClass(parent, options, instanceExtensions) {
 	return this
 } // end of initBase
 
+	
 //=========================================================================
 // jSignatureClass's methods and supporting fn's
 
@@ -964,7 +966,9 @@ jSignatureClass.prototype.resetCanvas = function(data){
 	ctx.shadowOffsetX = 0
 	ctx.shadowOffsetY = 0
 	var lineoffset = Math.round( ch / 5 )
-	basicLine(ctx, lineoffset * 1.5, ch - lineoffset, cw - (lineoffset * 1.5), ch - lineoffset)
+	if (!settings.hideCanvasLine) {
+		basicLine(ctx, lineoffset * 1.5, ch - lineoffset, cw - (lineoffset * 1.5), ch - lineoffset)
+	}
 	ctx.strokeStyle = settings.color
 
 	if (!isCanvasEmulator){
