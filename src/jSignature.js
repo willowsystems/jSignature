@@ -860,7 +860,7 @@ function jSignatureClass(parent, options, instanceExtensions) {
 			$canvas.bind('mouseup.'+apinamespace, drawEndHandler)
 			$canvas.bind('mousedown.'+apinamespace, drawStartHandler)
 		} else {
-			canvas.ontouchstart = function(e) {
+			canvas.addEventListener('touchstart', function(e) {
 				canvas.onmousedown = undef
 				canvas.onmouseup = undef
 				canvas.onmousemove = undef
@@ -872,10 +872,10 @@ function jSignatureClass(parent, options, instanceExtensions) {
 
 				drawStartHandler(e)
 
-				canvas.ontouchend = drawEndHandler
-				canvas.ontouchstart = drawStartHandler
-				canvas.ontouchmove = drawMoveHandler
-			}
+				canvas.addEventListener('touchend', drawEndHandler);
+				canvas.addEventListener('touchstart', drawStartHandler);
+				canvas.addEventListener('touchmove', drawMoveHandler);
+			});
 			canvas.onmousedown = function(e) {
 				canvas.ontouchstart = undef
 				canvas.ontouchend = undef
